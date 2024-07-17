@@ -7,77 +7,16 @@
 
 import UIKit
 
-//class CharacterCell: UITableViewCell {
-//
-//    static let identifier = "cell"
-//
-//    private let characterImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "image")
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        return imageView
-//    }()
-//
-//    private let nameLable: UILabel = {
-//        let label = UILabel()
-//        label.textColor = .white
-//        label.text = "Rick Sanchez"
-//        label.font = .boldSystemFont(ofSize: 18)
-//        return label
-//    }()
-//
-//    private let statusLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Alive"
-//        label.font = .boldSystemFont(ofSize: 16)
-//        return label
-//    }()
-//
-//    private let speciesLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Human"
-//        label.font = UIFont.systemFont(ofSize: 16)
-//        label.textColor = .white
-//        return label
-//    }()
-//
-//    private lazy var characteristicsStackView: UIStackView = {
-//        UIStackView(arrangedSubviews: [nameLable, statusLabel, speciesLabel],
-//                    axis: .vertical,
-//                    spacing: 6)
-//    }()
-//
-//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//
-//        setupCell()
-//        setupConstraints()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    private func setupCell() {
-//        backgroundColor = .gray
-//        contentView.addSubview(characterImageView)
-//        contentView.addSubview(characteristicsStackView)
-//    }
-//}
-//
-
-
 class CharacterCell: UITableViewCell {
     
     static let identifier = "CharacterCell"
     
     private let containerView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .darkGray
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -94,7 +33,6 @@ class CharacterCell: UITableViewCell {
         label.text = "Rick Sanchez"
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -102,32 +40,29 @@ class CharacterCell: UITableViewCell {
         let label = UILabel()
         label.text = "Alive"
         label.font = .boldSystemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let betweenPointLabel: UILabel = {
         let label = UILabel()
-        label.text = "•"
+        label.text = "• "
         label.textColor = .white
         return label
     }()
     
     private let speciesLabel: UILabel = {
         let label = UILabel()
+        label.text = "Human"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
-        label.text = "Human"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let genderLabel: UILabel = {
         let label = UILabel()
+        label.text = "Male"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
-        label.text = "Male"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
