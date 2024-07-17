@@ -9,6 +9,8 @@ import UIKit
 
 class CharactersListView: UIView {
     
+    var characters: [Character] = []
+    
     private lazy var charactersTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.identifier)
@@ -45,13 +47,14 @@ class CharactersListView: UIView {
 extension CharactersListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterCell.identifier, for: indexPath) as? CharacterCell else {
             return UITableViewCell()
         }
+        cell.configure(with: characters[indexPath.row])
         return cell
     }
 }
@@ -60,6 +63,14 @@ extension CharactersListView: UITableViewDataSource {
 extension CharactersListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+}
+
+//MARK: - CharactersListViewControllerDelegate
+extension CharactersListView: CharactersListViewControllerDelegate {
+    func updateList(_ characters: [Character]) {
+        self.characters = characters
+        charactersTableView.reloadData()
     }
 }
 

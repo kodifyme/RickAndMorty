@@ -22,61 +22,55 @@ class CharacterCell: UITableViewCell {
     
     private let characterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "image")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Rick Sanchez"
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "Alive"
         label.font = .boldSystemFont(ofSize: 16)
-        return label
-    }()
-    
-    private let betweenPointLabel: UILabel = {
-        let label = UILabel()
-        label.text = "• "
-        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let speciesLabel: UILabel = {
         let label = UILabel()
-        label.text = "Human"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let genderLabel: UILabel = {
         let label = UILabel()
-        label.text = "Male"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var statusSpeciesStackView: UIStackView = {
-        UIStackView(arrangedSubviews: [statusLabel, betweenPointLabel, speciesLabel],
-                    axis: .horizontal,
-                    spacing: 2)
-    }()
-    
-    private lazy var characteristicsStackView: UIStackView = {
-        UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
-                    axis: .vertical,
-                    spacing: 5)
-    }()
+//    private lazy var statusSpeciesStackView: UIStackView = {
+//        UIStackView(arrangedSubviews: [statusLabel, speciesLabel],
+//                    axis: .horizontal,
+//                    spacing: 2)
+//    }()
+//    
+//    private lazy var characteristicsStackView: UIStackView = {
+//        UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
+//                    axis: .vertical,
+//                    spacing: 5)
+//    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -92,13 +86,34 @@ class CharacterCell: UITableViewCell {
     private func setupCell() {
         backgroundColor = .black
         
-//        let selectedBackgroundView = UIView()
-//        selectedBackgroundView.backgroundColor = .black
-//        self.selectedBackgroundView = selectedBackgroundView
+        //        let selectedBackgroundView = UIView()
+        //        selectedBackgroundView.backgroundColor = .black
+        //        self.selectedBackgroundView = selectedBackgroundView
         
         contentView.addSubview(containerView)
+//        containerView.addSubview(characterImageView)
+//        containerView.addSubview(characteristicsStackView)
         containerView.addSubview(characterImageView)
-        containerView.addSubview(characteristicsStackView)
+        containerView.addSubview(nameLabel)
+        containerView.addSubview(statusLabel)
+        containerView.addSubview(speciesLabel)
+        containerView.addSubview(genderLabel)
+    }
+    
+    func configure(with model: Character) {
+        NetworkService.shared.fetchImage(from: model.image) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.characterImageView.image = image
+            case .failure(let error):
+                print("Failed to load image: \(error)")
+            }
+        }
+        characterImageView.image = UIImage(named: model.image)
+        nameLabel.text = model.name
+        statusLabel.text = model.status.rawValue
+        speciesLabel.text = "• \(model.species)"
+        genderLabel.text = model.gender
     }
 }
 
@@ -116,8 +131,19 @@ private extension CharacterCell {
             characterImageView.widthAnchor.constraint(equalToConstant: 85),
             characterImageView.heightAnchor.constraint(equalToConstant: 65),
             
-            characteristicsStackView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
-            characteristicsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+//            characteristicsStackView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
+//            characteristicsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+            nameLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
+            nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 9),
+            
+            statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            statusLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
+            
+            speciesLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            speciesLabel.leadingAnchor.constraint(equalTo: statusLabel.trailingAnchor, constant: 3),
+            
+            genderLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 5),
+            genderLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16)
         ])
     }
 }

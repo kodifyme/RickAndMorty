@@ -7,10 +7,18 @@
 
 import UIKit
 
+protocol CharactersListViewControllerDelegate: AnyObject {
+    func updateList(_ characters: [Character])
+}
+
 class CharactersListViewController: UIViewController {
     
+    weak var delegate: CharactersListViewControllerDelegate?
+    
     private lazy var charactersListView: CharactersListView = {
-        CharactersListView()
+        let view = CharactersListView()
+        delegate = view
+        return view
     }()
     
     override func viewDidLoad() {
@@ -18,6 +26,7 @@ class CharactersListViewController: UIViewController {
         
         setupNavigationBar()
         setupView()
+        fetchCharacters()
         setupConstraints()
     }
     
@@ -28,6 +37,17 @@ class CharactersListViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(charactersListView)
+    }
+    
+    private func fetchCharacters() {
+        NetworkService.shared.fetchCharacters { [weak self] result in
+            switch result {
+            case .success(let characters):
+                self?.delegate?.updateList(characters)
+            case .failure(let error):
+                print("Failed to fetch characters: \(error)")
+            }
+        }
     }
 }
 
