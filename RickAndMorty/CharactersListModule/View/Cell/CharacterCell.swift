@@ -60,17 +60,17 @@ class CharacterCell: UITableViewCell {
         return label
     }()
     
-//    private lazy var statusSpeciesStackView: UIStackView = {
-//        UIStackView(arrangedSubviews: [statusLabel, speciesLabel],
-//                    axis: .horizontal,
-//                    spacing: 2)
-//    }()
-//    
-//    private lazy var characteristicsStackView: UIStackView = {
-//        UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
-//                    axis: .vertical,
-//                    spacing: 5)
-//    }()
+    //    private lazy var statusSpeciesStackView: UIStackView = {
+    //        UIStackView(arrangedSubviews: [statusLabel, speciesLabel],
+    //                    axis: .horizontal,
+    //                    spacing: 2)
+    //    }()
+    //
+    //    private lazy var characteristicsStackView: UIStackView = {
+    //        UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
+    //                    axis: .vertical,
+    //                    spacing: 5)
+    //    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -86,13 +86,13 @@ class CharacterCell: UITableViewCell {
     private func setupCell() {
         backgroundColor = .black
         
-        //        let selectedBackgroundView = UIView()
-        //        selectedBackgroundView.backgroundColor = .black
-        //        self.selectedBackgroundView = selectedBackgroundView
+//        let selectedBackgroundView = UIView()
+//        selectedBackgroundView.backgroundColor = .black
+//        self.selectedBackgroundView = selectedBackgroundView
         
         contentView.addSubview(containerView)
-//        containerView.addSubview(characterImageView)
-//        containerView.addSubview(characteristicsStackView)
+        //        containerView.addSubview(characterImageView)
+        //        containerView.addSubview(characteristicsStackView)
         containerView.addSubview(characterImageView)
         containerView.addSubview(nameLabel)
         containerView.addSubview(statusLabel)
@@ -109,11 +109,26 @@ class CharacterCell: UITableViewCell {
                 print("Failed to load image: \(error)")
             }
         }
-        characterImageView.image = UIImage(named: model.image)
         nameLabel.text = model.name
         statusLabel.text = model.status.rawValue
         speciesLabel.text = "• \(model.species)"
         genderLabel.text = model.gender
+        
+        setStatusLabelColor(for: model.status)
+    }
+}
+
+//MARK: - Set Color For Status
+private extension CharacterCell {
+    func setStatusLabelColor(for status: Status) {
+        switch status {
+        case .alive:
+            statusLabel.textColor = .green
+        case .dead:
+            statusLabel.textColor = .red
+        case .unknown:
+            statusLabel.textColor = .gray
+        }
     }
 }
 
@@ -131,8 +146,8 @@ private extension CharacterCell {
             characterImageView.widthAnchor.constraint(equalToConstant: 85),
             characterImageView.heightAnchor.constraint(equalToConstant: 65),
             
-//            characteristicsStackView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
-//            characteristicsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+            //            characteristicsStackView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
+            //            characteristicsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
             nameLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 9),
             

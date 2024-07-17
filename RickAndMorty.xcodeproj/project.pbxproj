@@ -85,9 +85,7 @@
 			children = (
 				123BDE4A2C47F19C00CFCC86 /* Application */,
 				12C1DD172C486A7700ABB58F /* Services */,
-				12C1DD0E2C47F5C600ABB58F /* Model */,
-				12C1DD0C2C47F58900ABB58F /* View */,
-				12C1DD0D2C47F59400ABB58F /* Controller */,
+				12C1DD1E2C48809F00ABB58F /* CharactersListModule */,
 				12C1DD142C4842FD00ABB58F /* Extensions */,
 				123BDE4B2C47F1D900CFCC86 /* Resources */,
 			);
@@ -141,6 +139,16 @@
 				12C1DD1A2C486AEA00ABB58F /* NetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		12C1DD1E2C48809F00ABB58F /* CharactersListModule */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD0E2C47F5C600ABB58F /* Model */,
+				12C1DD0C2C47F58900ABB58F /* View */,
+				12C1DD0D2C47F59400ABB58F /* Controller */,
+			);
+			path = CharactersListModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
