@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CharactersListViewController.swift
 //  RickAndMorty
 //
 //  Created by KOДИ on 17.07.2024.
@@ -7,12 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class CharactersListViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
     }
 }
-

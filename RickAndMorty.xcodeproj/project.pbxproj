@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		128A335B2C47F05B00AA60C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A335A2C47F05B00AA60C2 /* AppDelegate.swift */; };
 		128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A335C2C47F05B00AA60C2 /* SceneDelegate.swift */; };
-		128A335F2C47F05B00AA60C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A335E2C47F05B00AA60C2 /* ViewController.swift */; };
 		128A33642C47F05C00AA60C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 128A33632C47F05C00AA60C2 /* Assets.xcassets */; };
 		128A33672C47F05C00AA60C2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 128A33662C47F05C00AA60C2 /* Base */; };
+		12C1DD0B2C47F58100ABB58F /* CharactersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */; };
+		12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		128A33572C47F05B00AA60C2 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		128A335A2C47F05B00AA60C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		128A335C2C47F05B00AA60C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		128A335E2C47F05B00AA60C2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		128A33632C47F05C00AA60C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128A33662C47F05C00AA60C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		128A33682C47F05C00AA60C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = RickAndMorty/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
+		12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewController.swift; sourceTree = "<group>"; };
+		12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +76,35 @@
 			isa = PBXGroup;
 			children = (
 				123BDE4A2C47F19C00CFCC86 /* Application */,
-				128A335E2C47F05B00AA60C2 /* ViewController.swift */,
+				12C1DD0E2C47F5C600ABB58F /* Model */,
+				12C1DD0C2C47F58900ABB58F /* View */,
+				12C1DD0D2C47F59400ABB58F /* Controller */,
 				123BDE4B2C47F1D900CFCC86 /* Resources */,
 			);
 			path = RickAndMorty;
+			sourceTree = "<group>";
+		};
+		12C1DD0C2C47F58900ABB58F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		12C1DD0D2C47F59400ABB58F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12C1DD0E2C47F5C600ABB58F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,9 +177,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				128A335F2C47F05B00AA60C2 /* ViewController.swift in Sources */,
 				128A335B2C47F05B00AA60C2 /* AppDelegate.swift in Sources */,
 				128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */,
+				12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */,
+				12C1DD0B2C47F58100ABB58F /* CharactersListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
