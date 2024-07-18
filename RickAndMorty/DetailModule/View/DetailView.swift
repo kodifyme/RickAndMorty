@@ -9,6 +9,8 @@ import UIKit
 
 class DetailView: UIView {
     
+    private let networkService = NetworkService.shared
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +65,7 @@ class DetailView: UIView {
     private lazy var itemsStackView: UIStackView = {
         UIStackView(arrangedSubviews: [posterImageView, statusView, speciesLabel, genderLabel, episodesLabel, locationLabel],
                     axis: .vertical,
-                    spacing: 12, 
+                    spacing: 12,
                     aligment: .fill)
     }()
     
@@ -92,7 +94,7 @@ class DetailView: UIView {
 //MARK: - DetailViewControllerDelegate
 extension DetailView: DetailViewControllerDelegate {
     func configure(with character: Character) {
-        NetworkService.shared.fetchImage(from: character.image) { [weak self] result in
+        networkService.fetchImage(from: character.image) { [weak self] result in
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
@@ -106,7 +108,14 @@ extension DetailView: DetailViewControllerDelegate {
         statusView.configure(with: character.status)
         speciesLabel.text = "Species: \(character.species)"
         genderLabel.text = "Gender: \(character.gender)"
-        episodesLabel.text = "Episodes: \(character.episode)"
+        networkService.fetchEpisodeNames(from: character.episode) { [weak self] result in
+            switch result {
+            case .success(let episodeNames):
+                self?.episodesLabel.text = "Episodes: \(episodeNames.joined(separator: ", "))"
+            case .failure(let error):
+                print("Failed to load episode names: \(error)")
+            }
+        }
         locationLabel.text = "Last known location: \(character.location.name)"
     }
 }

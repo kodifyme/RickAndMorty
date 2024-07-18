@@ -20,6 +20,7 @@
 		12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD242C488BD200ABB58F /* DetailViewController.swift */; };
 		12C1DD272C488F7D00ABB58F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD262C488F7D00ABB58F /* DetailView.swift */; };
 		12C1DD2C2C4892CF00ABB58F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD2B2C4892CF00ABB58F /* StatusView.swift */; };
+		12C1DD372C496B4600ABB58F /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD362C496B4600ABB58F /* Episode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		12C1DD242C488BD200ABB58F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		12C1DD262C488F7D00ABB58F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		12C1DD2B2C4892CF00ABB58F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		12C1DD362C496B4600ABB58F /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				12C1DD1C2C486B2F00ABB58F /* Character.swift */,
+				12C1DD362C496B4600ABB58F /* Episode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */,
+				12C1DD372C496B4600ABB58F /* Episode.swift in Sources */,
 				12C1DD132C4815B000ABB58F /* CharacterCell.swift in Sources */,
 				12C1DD2C2C4892CF00ABB58F /* StatusView.swift in Sources */,
 				12C1DD162C48433600ABB58F /* UIStackView + Extensions.swift in Sources */,

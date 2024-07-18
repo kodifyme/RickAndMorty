@@ -21,6 +21,7 @@ class CharactersListView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.identifier)
         tableView.backgroundColor = .black
+        tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
