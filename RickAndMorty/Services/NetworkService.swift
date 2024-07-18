@@ -35,7 +35,7 @@ class NetworkService {
     
     func fetchCharacters(page: Int, completion: @escaping (Result<[Character], Error>) -> Void) {
         
-        guard var baseCharacterURL else { return }
+        guard let baseCharacterURL else { return }
         
         guard var components = URLComponents(url: baseCharacterURL, resolvingAgainstBaseURL: false) else { return }
         

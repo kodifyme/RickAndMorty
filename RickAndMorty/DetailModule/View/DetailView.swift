@@ -22,7 +22,6 @@ class DetailView: UIView {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 20
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -32,7 +31,6 @@ class DetailView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -40,7 +38,6 @@ class DetailView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -49,7 +46,6 @@ class DetailView: UIView {
         label.textColor = .white
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -58,7 +54,6 @@ class DetailView: UIView {
         label.textColor = .white
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     

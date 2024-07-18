@@ -19,6 +19,34 @@ class CharactersListViewController: UIViewController {
     
     weak var delegate: CharactersListViewControllerDelegate?
     
+    private lazy var searchTextField: SearchTextField = {
+        let textField = SearchTextField()
+        textField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        return textField
+    }()
+    
+    private lazy var filterButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var searchStackView: UIStackView = {
+        UIStackView(arrangedSubviews: [searchTextField, filterButton],
+                    axis: .horizontal,
+                    spacing: 2,
+                    aligment: .center)
+    }()
+    //
+    //    private lazy var filterView: FilterView = {
+    //        let view = FilterView()
+    //        view.delegate = self
+    //        view.translatesAutoresizingMaskIntoConstraints = false
+    //        return view
+    //    }()
+    
     private lazy var charactersListView: CharactersListView = {
         let view = CharactersListView()
         view.delegate = self
@@ -41,6 +69,7 @@ class CharactersListViewController: UIViewController {
     }
     
     private func setupView() {
+        view.addSubview(searchStackView)
         view.addSubview(charactersListView)
     }
     
@@ -60,7 +89,24 @@ class CharactersListViewController: UIViewController {
             }
         }
     }
+    
+    @objc private func searchTextChanged() {
+        
+    }
+    
+    @objc private func filterButtonTapped() {
+        let filterVC = FilterViewController()
+        
+        if let sheet = filterVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = false
+        }
+        present(filterVC, animated: true)
+    }
 }
+
+//MARK: -
+
 
 //MARK: - CharactersListViewDelegate
 extension CharactersListViewController: CharactersListViewDelegate {
@@ -79,7 +125,11 @@ extension CharactersListViewController: CharactersListViewDelegate {
 private extension CharactersListViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            charactersListView.topAnchor.constraint(equalTo: view.topAnchor),
+            searchStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            searchStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            
+            charactersListView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2),
             charactersListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersListView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             charactersListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
