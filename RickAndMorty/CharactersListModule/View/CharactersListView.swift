@@ -9,6 +9,7 @@ import UIKit
 
 protocol CharactersListViewDelegate: AnyObject {
     func didSelectCharacter(_ character: Character)
+    func loadMoreCharacters()
 }
 
 class CharactersListView: UIView {
@@ -22,6 +23,13 @@ class CharactersListView: UIView {
         tableView.backgroundColor = .black
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
     }()
     
     override init(frame: CGRect) {
@@ -40,6 +48,7 @@ class CharactersListView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .black
         addSubview(charactersTableView)
+        addSubview(activityIndicator)
     }
     
     private func setDelegates() {
@@ -70,6 +79,27 @@ extension CharactersListView: UITableViewDelegate {
         100
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height {
+            delegate?.loadMoreCharacters()
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let lastSectionIndex = tableView.numberOfSections - 1
+//           let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+//           if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
+//              // print("this is the last cell")
+//               
+//               activityIndicator.startAnimating()
+//               activityIndicator.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+//
+//               tableView.tableFooterView = activityIndicator
+//               tableView.tableFooterView?.isHidden = false
+//               delegate?.loadMoreCharacters()
+//           }
+//    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         delegate?.didSelectCharacter(characters[indexPath.row])
@@ -78,8 +108,14 @@ extension CharactersListView: UITableViewDelegate {
 
 //MARK: - CharactersListViewControllerDelegate
 extension CharactersListView: CharactersListViewControllerDelegate {
+    
     func updateList(_ characters: [Character]) {
         self.characters = characters
+        charactersTableView.reloadData()
+    }
+    
+    func appendList(_ characters: [Character]) {
+        self.characters.append(contentsOf: characters)
         charactersTableView.reloadData()
     }
 }
@@ -91,7 +127,10 @@ private extension CharactersListView {
             charactersTableView.topAnchor.constraint(equalTo: topAnchor),
             charactersTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             charactersTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            charactersTableView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            charactersTableView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: charactersTableView.bottomAnchor)
         ])
     }
 }

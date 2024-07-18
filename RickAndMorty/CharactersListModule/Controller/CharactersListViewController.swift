@@ -9,9 +9,13 @@ import UIKit
 
 protocol CharactersListViewControllerDelegate: AnyObject {
     func updateList(_ characters: [Character])
+    func appendList(_ characters: [Character])
 }
 
 class CharactersListViewController: UIViewController {
+    
+    private var currentPage = 1
+    private var isLoading = false
     
     weak var delegate: CharactersListViewControllerDelegate?
     
@@ -27,7 +31,7 @@ class CharactersListViewController: UIViewController {
         
         setupNavigationBar()
         setupView()
-        fetchCharacters()
+        fetchCharacters(page: currentPage)
         setupConstraints()
     }
     
@@ -40,11 +44,17 @@ class CharactersListViewController: UIViewController {
         view.addSubview(charactersListView)
     }
     
-    private func fetchCharacters() {
-        NetworkService.shared.fetchCharacters { [weak self] result in
+    private func fetchCharacters(page: Int) {
+        isLoading = true
+        NetworkService.shared.fetchCharacters(page: page) { [weak self] result in
+            self?.isLoading = false
             switch result {
             case .success(let characters):
-                self?.delegate?.updateList(characters)
+                if page == 1 {
+                    self?.delegate?.updateList(characters)
+                } else {
+                    self?.delegate?.appendList(characters)
+                }
             case .failure(let error):
                 print("Failed to fetch characters: \(error)")
             }
@@ -56,6 +66,12 @@ class CharactersListViewController: UIViewController {
 extension CharactersListViewController: CharactersListViewDelegate {
     func didSelectCharacter(_ character: Character) {
         navigationController?.pushViewController(DetailViewController(character: character), animated: true)
+    }
+    
+    func loadMoreCharacters() {
+        guard !isLoading else { return }
+        currentPage += 1
+        fetchCharacters(page: currentPage)
     }
 }
 

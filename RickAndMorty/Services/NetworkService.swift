@@ -16,23 +16,26 @@ struct Constants {
 
 class NetworkService {
     
+    struct QueryItem {
+        static let page = "page"
+    }
+    
     static let shared = NetworkService()
     private let session = URLSession.shared
     
     private init() {}
     
-    private lazy var baseURL: URL? = {
+    func fetchCharacters(page: Int, completion: @escaping (Result<[Character], Error>) -> Void) {
+        
         var components = URLComponents()
         components.scheme = Constants.scheme
         components.host = Constants.host
         components.path = "/\(Constants.characterPath)"
-        return components.url
-    }()
-    
-    func fetchCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
-        guard let baseURL else { return }
+        components.queryItems = [URLQueryItem(name: QueryItem.page, value: "\(page)")]
         
-        let task = session.dataTask(with: baseURL) { data, _, error in
+        guard let url = components.url else { return }
+        
+        let task = session.dataTask(with: url) { data, _, error in
             guard let data, error == nil else {
                 if let error {
                     completion(.failure(error))
