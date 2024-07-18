@@ -10,7 +10,8 @@ import UIKit
 struct Constants {
     static let scheme = "https"
     static let host = "rickandmortyapi.com"
-    static let path = "api/character"
+    static let characterPath = "api/character"
+    static let episodePath = "api/episode"
 }
 
 class NetworkService {
@@ -24,7 +25,7 @@ class NetworkService {
         var components = URLComponents()
         components.scheme = Constants.scheme
         components.host = Constants.host
-        components.path = "/\(Constants.path)"
+        components.path = "/\(Constants.characterPath)"
         return components.url
     }()
     

@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol CharactersListViewDelegate: AnyObject {
+    func didSelectCharacter(_ character: Character)
+}
+
 class CharactersListView: UIView {
     
+    weak var delegate: CharactersListViewDelegate?
     var characters: [Character] = []
     
     private lazy var charactersTableView: UITableView = {
@@ -63,6 +68,11 @@ extension CharactersListView: UITableViewDataSource {
 extension CharactersListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.didSelectCharacter(characters[indexPath.row])
     }
 }
 

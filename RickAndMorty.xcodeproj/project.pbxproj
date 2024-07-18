@@ -17,6 +17,9 @@
 		12C1DD162C48433600ABB58F /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */; };
 		12C1DD1B2C486AEA00ABB58F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD1A2C486AEA00ABB58F /* NetworkService.swift */; };
 		12C1DD1D2C486B2F00ABB58F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD1C2C486B2F00ABB58F /* Character.swift */; };
+		12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD242C488BD200ABB58F /* DetailViewController.swift */; };
+		12C1DD272C488F7D00ABB58F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD262C488F7D00ABB58F /* DetailView.swift */; };
+		12C1DD2C2C4892CF00ABB58F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD2B2C4892CF00ABB58F /* StatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 		12C1DD1A2C486AEA00ABB58F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		12C1DD1C2C486B2F00ABB58F /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		12C1DD242C488BD200ABB58F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		12C1DD262C488F7D00ABB58F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		12C1DD2B2C4892CF00ABB58F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 				123BDE4A2C47F19C00CFCC86 /* Application */,
 				12C1DD172C486A7700ABB58F /* Services */,
 				12C1DD1E2C48809F00ABB58F /* CharactersListModule */,
+				12C1DD212C488B8800ABB58F /* DetailModule */,
 				12C1DD142C4842FD00ABB58F /* Extensions */,
 				123BDE4B2C47F1D900CFCC86 /* Resources */,
 			);
@@ -128,6 +135,7 @@
 		12C1DD142C4842FD00ABB58F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				12C1DD282C48926900ABB58F /* CustomViews */,
 				12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */,
 			);
 			path = Extensions;
@@ -149,6 +157,39 @@
 				12C1DD0D2C47F59400ABB58F /* Controller */,
 			);
 			path = CharactersListModule;
+			sourceTree = "<group>";
+		};
+		12C1DD212C488B8800ABB58F /* DetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD232C488BB500ABB58F /* View */,
+				12C1DD222C488BA500ABB58F /* Controller */,
+			);
+			path = DetailModule;
+			sourceTree = "<group>";
+		};
+		12C1DD222C488BA500ABB58F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD242C488BD200ABB58F /* DetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12C1DD232C488BB500ABB58F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD262C488F7D00ABB58F /* DetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		12C1DD282C48926900ABB58F /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD2B2C4892CF00ABB58F /* StatusView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,8 +262,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */,
 				12C1DD132C4815B000ABB58F /* CharacterCell.swift in Sources */,
+				12C1DD2C2C4892CF00ABB58F /* StatusView.swift in Sources */,
 				12C1DD162C48433600ABB58F /* UIStackView + Extensions.swift in Sources */,
+				12C1DD272C488F7D00ABB58F /* DetailView.swift in Sources */,
 				128A335B2C47F05B00AA60C2 /* AppDelegate.swift in Sources */,
 				128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */,
 				12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */,

@@ -60,17 +60,19 @@ class CharacterCell: UITableViewCell {
         return label
     }()
     
-    //    private lazy var statusSpeciesStackView: UIStackView = {
-    //        UIStackView(arrangedSubviews: [statusLabel, speciesLabel],
-    //                    axis: .horizontal,
-    //                    spacing: 2)
-    //    }()
-    //
-    //    private lazy var characteristicsStackView: UIStackView = {
-    //        UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
-    //                    axis: .vertical,
-    //                    spacing: 5)
-    //    }()
+    private lazy var statusSpeciesStackView: UIStackView = {
+       UIStackView(arrangedSubviews: [statusLabel, speciesLabel],
+                   axis: .horizontal,
+                   spacing: 2,
+                   aligment: .leading)
+    }()
+    
+    private lazy var characteristicsStackView: UIStackView = {
+        UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
+                    axis: .vertical,
+                    spacing: 5,
+                    aligment: .leading)
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -86,18 +88,9 @@ class CharacterCell: UITableViewCell {
     private func setupCell() {
         backgroundColor = .black
         
-//        let selectedBackgroundView = UIView()
-//        selectedBackgroundView.backgroundColor = .black
-//        self.selectedBackgroundView = selectedBackgroundView
-        
         contentView.addSubview(containerView)
-        //        containerView.addSubview(characterImageView)
-        //        containerView.addSubview(characteristicsStackView)
         containerView.addSubview(characterImageView)
-        containerView.addSubview(nameLabel)
-        containerView.addSubview(statusLabel)
-        containerView.addSubview(speciesLabel)
-        containerView.addSubview(genderLabel)
+        containerView.addSubview(characteristicsStackView)
     }
     
     func configure(with model: Character) {
@@ -123,11 +116,11 @@ private extension CharacterCell {
     func setStatusLabelColor(for status: Status) {
         switch status {
         case .alive:
-            statusLabel.textColor = .green
+            statusLabel.textColor = .systemGreen
         case .dead:
-            statusLabel.textColor = .red
+            statusLabel.textColor = .systemRed
         case .unknown:
-            statusLabel.textColor = .gray
+            statusLabel.textColor = .systemGray
         }
     }
 }
@@ -136,29 +129,18 @@ private extension CharacterCell {
 private extension CharacterCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            containerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            characterImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            characterImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 15),
             characterImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             characterImageView.widthAnchor.constraint(equalToConstant: 85),
             characterImageView.heightAnchor.constraint(equalToConstant: 65),
             
-            //            characteristicsStackView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
-            //            characteristicsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-            nameLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
-            nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 9),
-            
-            statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            statusLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16),
-            
-            speciesLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
-            speciesLabel.leadingAnchor.constraint(equalTo: statusLabel.trailingAnchor, constant: 3),
-            
-            genderLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 5),
-            genderLabel.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 16)
+            characteristicsStackView.leadingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: 15),
+            characteristicsStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
     }
 }

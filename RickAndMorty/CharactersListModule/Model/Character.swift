@@ -20,29 +20,20 @@ struct Character: Codable {
     let name: String
     let status: Status
     let species: String
-    let type: String
     let gender: String
+    let location: Location
     let image: String
+    let episode: [String]
+}
+
+struct Location: Codable {
+    let name: String
+    let url: String
 }
 
 enum Status: String, Codable {
     case alive = "Alive"
     case dead = "Dead"
     case unknown = "unknown"
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(String.self).lowercased()
-        switch rawValue {
-        case "alive":
-            self = .alive
-        case "dead":
-            self = .dead
-        case "unknown":
-            self = .unknown
-        default:
-            self = .unknown
-        }
-    }
 }
 

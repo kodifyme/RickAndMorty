@@ -17,6 +17,7 @@ class CharactersListViewController: UIViewController {
     
     private lazy var charactersListView: CharactersListView = {
         let view = CharactersListView()
+        view.delegate = self
         delegate = view
         return view
     }()
@@ -48,6 +49,13 @@ class CharactersListViewController: UIViewController {
                 print("Failed to fetch characters: \(error)")
             }
         }
+    }
+}
+
+//MARK: - CharactersListViewDelegate
+extension CharactersListViewController: CharactersListViewDelegate {
+    func didSelectCharacter(_ character: Character) {
+        navigationController?.pushViewController(DetailViewController(character: character), animated: true)
     }
 }
 
