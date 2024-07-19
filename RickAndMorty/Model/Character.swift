@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct CharacterResponse: Codable {
-    let characters: [Character]
+struct CharactersResponse: Codable {
+    let characters: [Character]?
     
     enum CodingKeys: String, CodingKey {
         case characters = "results"

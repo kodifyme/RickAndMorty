@@ -12,6 +12,8 @@
 		128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A335C2C47F05B00AA60C2 /* SceneDelegate.swift */; };
 		128A33642C47F05C00AA60C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 128A33632C47F05C00AA60C2 /* Assets.xcassets */; };
 		128A33672C47F05C00AA60C2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 128A33662C47F05C00AA60C2 /* Base */; };
+		12A7778B2C4A5D730071A36A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A7778A2C4A5D730071A36A /* Filter.swift */; };
+		12A7778F2C4A88EB0071A36A /* ActivityFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */; };
 		12C1DD0B2C47F58100ABB58F /* CharactersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */; };
 		12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */; };
 		12C1DD132C4815B000ABB58F /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD122C4815B000ABB58F /* CharacterCell.swift */; };
@@ -35,6 +37,8 @@
 		128A33632C47F05C00AA60C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		128A33662C47F05C00AA60C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		128A33682C47F05C00AA60C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = RickAndMorty/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
+		12A7778A2C4A5D730071A36A /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFooterView.swift; sourceTree = "<group>"; };
 		12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewController.swift; sourceTree = "<group>"; };
 		12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListView.swift; sourceTree = "<group>"; };
 		12C1DD122C4815B000ABB58F /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
@@ -101,13 +105,30 @@
 			children = (
 				123BDE4A2C47F19C00CFCC86 /* Application */,
 				12C1DD172C486A7700ABB58F /* Services */,
+				12C1DD0E2C47F5C600ABB58F /* Model */,
 				12C1DD1E2C48809F00ABB58F /* CharactersListModule */,
-				12C1DD3E2C49C79400ABB58F /* FilterModule */,
 				12C1DD212C488B8800ABB58F /* DetailModule */,
+				12C1DD3E2C49C79400ABB58F /* FilterModule */,
 				12C1DD142C4842FD00ABB58F /* Extensions */,
 				123BDE4B2C47F1D900CFCC86 /* Resources */,
 			);
 			path = RickAndMorty;
+			sourceTree = "<group>";
+		};
+		12A7778C2C4A5DA50071A36A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD3F2C49C7B000ABB58F /* FilterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		12A7778D2C4A5DAD0071A36A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD3C2C49B37500ABB58F /* FilterView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		12C1DD0C2C47F58900ABB58F /* View */ = {
@@ -115,6 +136,7 @@
 			children = (
 				12C1DD112C4815A000ABB58F /* Cell */,
 				12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */,
+				12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -132,6 +154,7 @@
 			children = (
 				12C1DD1C2C486B2F00ABB58F /* Character.swift */,
 				12C1DD362C496B4600ABB58F /* Episode.swift */,
+				12A7778A2C4A5D730071A36A /* Filter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,7 +187,6 @@
 		12C1DD1E2C48809F00ABB58F /* CharactersListModule */ = {
 			isa = PBXGroup;
 			children = (
-				12C1DD0E2C47F5C600ABB58F /* Model */,
 				12C1DD0C2C47F58900ABB58F /* View */,
 				12C1DD0D2C47F59400ABB58F /* Controller */,
 			);
@@ -209,8 +231,8 @@
 		12C1DD3E2C49C79400ABB58F /* FilterModule */ = {
 			isa = PBXGroup;
 			children = (
-				12C1DD3F2C49C7B000ABB58F /* FilterViewController.swift */,
-				12C1DD3C2C49B37500ABB58F /* FilterView.swift */,
+				12A7778D2C4A5DAD0071A36A /* View */,
+				12A7778C2C4A5DA50071A36A /* Controller */,
 			);
 			path = FilterModule;
 			sourceTree = "<group>";
@@ -297,10 +319,12 @@
 				128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */,
 				12C1DD402C49C7B000ABB58F /* FilterViewController.swift in Sources */,
 				12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */,
+				12A7778F2C4A88EB0071A36A /* ActivityFooterView.swift in Sources */,
 				12C1DD0B2C47F58100ABB58F /* CharactersListViewController.swift in Sources */,
 				12C1DD1B2C486AEA00ABB58F /* NetworkService.swift in Sources */,
 				12C1DD1D2C486B2F00ABB58F /* Character.swift in Sources */,
 				12C1DD3B2C49AC0E00ABB58F /* SearchTextField.swift in Sources */,
+				12A7778B2C4A5D730071A36A /* Filter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +471,7 @@
 				DEVELOPMENT_TEAM = UJRW24XH5L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickAndMorty/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Рик и Морти";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -477,6 +502,7 @@
 				DEVELOPMENT_TEAM = UJRW24XH5L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickAndMorty/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Рик и Морти";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -103,7 +103,7 @@ extension DetailView: DetailViewControllerDelegate {
         statusView.configure(with: character.status)
         speciesLabel.text = "Species: \(character.species)"
         genderLabel.text = "Gender: \(character.gender)"
-        networkService.fetchEpisodeNames(from: character.episode) { [weak self] result in
+        networkService.fetchEpisodesNames(from: character.episode) { [weak self] result in
             switch result {
             case .success(let episodeNames):
                 self?.episodesLabel.text = "Episodes: \(episodeNames.joined(separator: ", "))"

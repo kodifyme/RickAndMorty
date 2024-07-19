@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol FilterViewControllerDelegate: AnyObject {
+    func didApplyFilters(criteria: Filter)
+}
+
 class FilterViewController: UIViewController {
+    
+    weak var delegate: FilterViewControllerDelegate?
     
     private lazy var filterView: FilterView = {
         let view = FilterView()
+        view.delegate = self
         return view
     }()
     
@@ -23,6 +30,20 @@ class FilterViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(filterView)
+    }
+}
+
+//MARK: - FilterViewDelegate
+extension FilterViewController: FilterViewDelegate {
+    func didApplyFilter(status: String?, gender: String?) {
+        let criteria = Filter(status: status, gender: gender)
+        delegate?.didApplyFilters(criteria: criteria)
+        dismiss(animated: true)
+    }
+    
+    func didResetFilters() {
+        delegate?.didApplyFilters(criteria: Filter(status: nil, gender: nil))
+        dismiss(animated: true)
     }
 }
 

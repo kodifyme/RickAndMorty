@@ -14,32 +14,13 @@ protocol CharactersListViewControllerDelegate: AnyObject {
 
 class CharactersListViewController: UIViewController {
     
-    private var currentPage = 1
-    private var isLoading = false
-    
     weak var delegate: CharactersListViewControllerDelegate?
     
-    private lazy var searchTextField: SearchTextField = {
-        let textField = SearchTextField()
-        textField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
-        return textField
-    }()
+    private var currentPage = 1
+    private var isLoading = false
+    private var filterCriteria: Filter?
+    private var searchQuery: String?
     
-    private lazy var filterButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var searchStackView: UIStackView = {
-        UIStackView(arrangedSubviews: [searchTextField, filterButton],
-                    axis: .horizontal,
-                    spacing: 2,
-                    alignment: .center)
-    }()
-
     private lazy var charactersListView: CharactersListView = {
         let view = CharactersListView()
         view.delegate = self
@@ -47,13 +28,20 @@ class CharactersListViewController: UIViewController {
         return view
     }()
     
+    private lazy var filterVC: FilterViewController = {
+        let vc = FilterViewController()
+        vc.delegate = self
+        
+        vc.sheetPresentationController?.prefersGrabberVisible = false
+        return vc
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
         setupView()
-        fetchCharacters(page: currentPage)
-        setupConstraints()
+        fetchCharacters()
     }
     
     private func setupNavigationBar() {
@@ -62,47 +50,38 @@ class CharactersListViewController: UIViewController {
     }
     
     private func setupView() {
-        view.addSubview(searchStackView)
         view.addSubview(charactersListView)
+        setupConstraints()
     }
     
-    private func fetchCharacters(page: Int) {
+    private func fetchCharacters() {
         isLoading = true
-        NetworkService.shared.fetchCharacters(page: page) { [weak self] result in
-            self?.isLoading = false
+        NetworkService.shared.fetchCharacters(page: currentPage, searchQuery: searchQuery, filterCriteria: filterCriteria) { [weak self] result in
+            guard let self else { return }
+            isLoading = false
+            
             switch result {
             case .success(let characters):
-                if page == 1 {
-                    self?.delegate?.updateList(characters)
-                } else {
-                    self?.delegate?.appendList(characters)
-                }
+                currentPage == 1 ? delegate?.updateList(characters) : delegate?.appendList(characters)
             case .failure(let error):
                 print("Failed to fetch characters: \(error)")
             }
         }
     }
-    
-    @objc private func searchTextChanged() {
-        
-    }
-    
-    @objc private func filterButtonTapped() {
-        let filterVC = FilterViewController()
-        
-        if let sheet = filterVC.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersGrabberVisible = false
-        }
-        present(filterVC, animated: true)
+}
+
+//MARK: - FilterViewControllerDelegate
+extension CharactersListViewController: FilterViewControllerDelegate {
+    func didApplyFilters(criteria: Filter) {
+        filterCriteria = criteria
+        currentPage = 1
+        fetchCharacters()
     }
 }
 
-//MARK: -
-
-
 //MARK: - CharactersListViewDelegate
 extension CharactersListViewController: CharactersListViewDelegate {
+    
     func didSelectCharacter(_ character: Character) {
         navigationController?.pushViewController(DetailViewController(character: character), animated: true)
     }
@@ -110,7 +89,18 @@ extension CharactersListViewController: CharactersListViewDelegate {
     func loadMoreCharacters() {
         guard !isLoading else { return }
         currentPage += 1
-        fetchCharacters(page: currentPage)
+        fetchCharacters()
+    }
+    
+    func searchTextChanged(_ text: String) {
+        searchQuery = text
+        currentPage = 1
+        fetchCharacters()
+    }
+    
+    func filterButtonTapped() {
+        filterVC.sheetPresentationController?.detents = [.medium()]
+        present(filterVC, animated: true)
     }
 }
 
@@ -118,11 +108,7 @@ extension CharactersListViewController: CharactersListViewDelegate {
 private extension CharactersListViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            searchStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            searchStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            searchStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            
-            charactersListView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 2),
+            charactersListView.topAnchor.constraint(equalTo: view.topAnchor, constant: 2),
             charactersListView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersListView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             charactersListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

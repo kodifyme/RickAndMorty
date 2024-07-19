@@ -10,34 +10,67 @@ import UIKit
 protocol CharactersListViewDelegate: AnyObject {
     func didSelectCharacter(_ character: Character)
     func loadMoreCharacters()
+    func searchTextChanged(_ text: String)
+    func filterButtonTapped()
+}
+
+protocol CharactersListActivityDelegate: AnyObject {
+    func start()
+    func stop()
 }
 
 class CharactersListView: UIView {
     
     weak var delegate: CharactersListViewDelegate?
-    var characters: [Character] = []
+    weak var activityDelegate: CharactersListActivityDelegate?
+    
+    private var characters: [Character] = []
+    
+    private lazy var searchTextField: SearchTextField = {
+        let textField = SearchTextField()
+        textField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        return textField
+    }()
+    
+    private lazy var filterButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var searchStackView: UIStackView = {
+        UIStackView(arrangedSubviews: [searchTextField, filterButton],
+                    axis: .horizontal,
+                    spacing: 2,
+                    alignment: .center)
+    }()
     
     private lazy var charactersTableView: UITableView = {
+        
+        lazy var footerView: ActivityFooterView = {
+            let footerView = ActivityFooterView()
+            activityDelegate = footerView
+            return footerView
+        }()
+        
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.identifier)
+        tableView.register(ActivityFooterView.self, forHeaderFooterViewReuseIdentifier: ActivityFooterView.identifier)
         tableView.backgroundColor = .black
         tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = footerView
+        tableView.sectionFooterHeight = 44
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.color = .white
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupView()
-        setDelegates()
         setupConstraints()
     }
     
@@ -48,13 +81,18 @@ class CharactersListView: UIView {
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .black
+        
+        addSubview(searchStackView)
         addSubview(charactersTableView)
-        addSubview(activityIndicator)
     }
     
-    private func setDelegates() {
-        charactersTableView.dataSource = self
-        charactersTableView.delegate = self
+    @objc private func searchTextChanged() {
+        guard let text = searchTextField.text else { return }
+        delegate?.searchTextChanged(text)
+    }
+    
+    @objc private func filterButtonTapped() {
+        delegate?.filterButtonTapped()
     }
 }
 
@@ -80,26 +118,16 @@ extension CharactersListView: UITableViewDelegate {
         100
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastSectionIndex = tableView.numberOfSections - 1
+        let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        
+        if indexPath.section == lastSectionIndex && indexPath.row == lastRowIndex {
+            activityDelegate?.start()
             delegate?.loadMoreCharacters()
         }
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let lastSectionIndex = tableView.numberOfSections - 1
-//           let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-//           if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
-//              // print("this is the last cell")
-//               
-//               activityIndicator.startAnimating()
-//               activityIndicator.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-//
-//               tableView.tableFooterView = activityIndicator
-//               tableView.tableFooterView?.isHidden = false
-//               delegate?.loadMoreCharacters()
-//           }
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -112,10 +140,13 @@ extension CharactersListView: CharactersListViewControllerDelegate {
     
     func updateList(_ characters: [Character]) {
         self.characters = characters
+        activityDelegate?.stop()
         charactersTableView.reloadData()
     }
     
     func appendList(_ characters: [Character]) {
+        activityDelegate?.stop()
+        guard !characters.isEmpty else { return }
         self.characters.append(contentsOf: characters)
         charactersTableView.reloadData()
     }
@@ -125,13 +156,14 @@ extension CharactersListView: CharactersListViewControllerDelegate {
 private extension CharactersListView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            charactersTableView.topAnchor.constraint(equalTo: topAnchor),
+            searchStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            searchStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            searchStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            
+            charactersTableView.topAnchor.constraint(equalTo: searchStackView.bottomAnchor, constant: 5),
             charactersTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             charactersTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            charactersTableView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.topAnchor.constraint(equalTo: charactersTableView.bottomAnchor)
+            charactersTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

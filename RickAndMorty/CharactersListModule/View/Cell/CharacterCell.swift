@@ -32,6 +32,7 @@ class CharacterCell: UITableViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
         label.font = .boldSystemFont(ofSize: 18)
         return label
     }()
@@ -83,6 +84,7 @@ class CharacterCell: UITableViewCell {
     
     private func setupCell() {
         backgroundColor = .black
+        selectionStyle = .none
         
         contentView.addSubview(containerView)
         containerView.addSubview(characterImageView)

@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol FilterViewDelegate: AnyObject {
+    func didApplyFilter(status: String?, gender: String?)
+    func didResetFilters()
+}
+
 class FilterView: UIView {
+    
+    weak var delegate: FilterViewDelegate?
     
     private let statusLabel: UILabel = {
         let label = UILabel()
@@ -105,11 +112,15 @@ class FilterView: UIView {
     }
     
     @objc private func applyButtonTapped() {
-        
+        let selectedStatus = statusStackView.arrangedSubviews.compactMap { ($0 as? SelectableButton)?.isSelectedButton ?? false ? ($0 as? SelectableButton)?.title(for: .normal) : nil }.first
+        let selectedGender = genderStackView.arrangedSubviews.compactMap { ($0 as? SelectableButton)?.isSelectedButton ?? false ? ($0 as? SelectableButton)?.title(for: .normal) : nil }.first
+        delegate?.didApplyFilter(status: selectedStatus, gender: selectedGender)
     }
     
     @objc private func resetButtonTapped() {
-        
+        statusStackView.arrangedSubviews.forEach { ($0 as? SelectableButton)?.isSelectedButton = false }
+        genderStackView.arrangedSubviews.forEach { ($0 as? SelectableButton)?.isSelectedButton = false }
+        delegate?.didResetFilters()
     }
 }
 

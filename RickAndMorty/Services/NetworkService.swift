@@ -10,32 +10,35 @@ import UIKit
 struct Constants {
     static let scheme = "https"
     static let host = "rickandmortyapi.com"
-    static let characterPath = "api/character"
-    static let episodePath = "/api/episode/"
+    static let characterPath = "/api/character"
+    static let episodePath = "/api/episode"
 }
 
 class NetworkService {
     
     struct QueryItem {
         static let page = "page"
+        static let name = "name"
+        static let status = "status"
+        static let gender = "gender"
     }
     
     static let shared = NetworkService()
     private let session = URLSession.shared
     
-    private lazy var baseCharacterURL: URL? = {
+    private init() {}
+    
+    func generateURLComponents(using path: String) -> URL? {
         var components = URLComponents()
         components.scheme = Constants.scheme
         components.host = Constants.host
-        components.path = "/\(Constants.characterPath)"
+        components.path = path
         return components.url
-    }()
+    }
     
-    private init() {}
-    
-    func fetchCharacters(page: Int, completion: @escaping (Result<[Character], Error>) -> Void) {
+    func fetchCharacters(page: Int, searchQuery: String?, filterCriteria: Filter?, completion: @escaping (Result<[Character], Error>) -> Void) {
         
-        guard let baseCharacterURL else { return }
+        guard let baseCharacterURL = generateURLComponents(using: Constants.characterPath) else { return }
         
         guard var components = URLComponents(url: baseCharacterURL, resolvingAgainstBaseURL: false) else { return }
         
@@ -43,9 +46,22 @@ class NetworkService {
             URLQueryItem(name: QueryItem.page, value: "\(page)")
         ]
         
+        if let searchQuery, !searchQuery.isEmpty {
+            components.queryItems?.append(URLQueryItem(name: QueryItem.name, value: searchQuery))
+        }
+        
+        if let filterCriteria {
+            if let status = filterCriteria.status {
+                components.queryItems?.append(URLQueryItem(name: QueryItem.status, value: status))
+            }
+            if let gender = filterCriteria.gender {
+                components.queryItems?.append(URLQueryItem(name: QueryItem.gender, value: gender))
+            }
+        }
+        
         guard let url = components.url else { return }
         
-        let task = session.dataTask(with: url) { data, _, error in
+        session.dataTask(with: url, completionHandler: { data, _, error in
             guard let data, error == nil else {
                 if let error {
                     completion(.failure(error))
@@ -54,21 +70,21 @@ class NetworkService {
             }
             
             do {
-                let results = try JSONDecoder().decode(CharacterResponse.self, from: data)
+                let results = try JSONDecoder().decode(CharactersResponse.self, from: data)
                 DispatchQueue.main.async {
-                    completion(.success(results.characters))
+                    completion(.success(results.characters ?? []))
                 }
             } catch {
                 completion(.failure(error))
             }
-        }
-        task.resume()
+        }).resume()
     }
     
     func fetchImage(from urlString: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        
         guard let url = URL(string: urlString) else { return }
         
-        let task = session.dataTask(with: url) { data, _, error in
+        session.dataTask(with: url, completionHandler: { data, _, error in
             guard let data, error == nil else {
                 if let error {
                     completion(.failure(error))
@@ -77,34 +93,33 @@ class NetworkService {
             }
             
             guard let image = UIImage(data: data) else {
-                completion(.failure(error!))
+                if let error {
+                    completion(.failure(error))
+                }
                 return
             }
             
             DispatchQueue.main.async {
                 completion(.success(image))
             }
-        }
-        task.resume()
+        }).resume()
     }
     
-    func fetchEpisodeNames(from episodeURLs: [String], completion: @escaping (Result<[String], Error>) -> Void) {
-        let episodeIDs = episodeURLs.compactMap { URL(string: $0)?.lastPathComponent }
-        guard !episodeIDs.isEmpty else {
+    func fetchEpisodesNames(from episodesURLs: [String], completion: @escaping (Result<[String], Error>) -> Void) {
+        
+        let episodesIDs = episodesURLs.compactMap { URL(string: $0)?.lastPathComponent }
+        guard !episodesIDs.isEmpty else {
             completion(.success([]))
             return
         }
         
-        let episodeIDString = episodeIDs.joined(separator: ",")
-        var components = URLComponents()
-        components.scheme = Constants.scheme
-        components.host = Constants.host
-        components.path = Constants.episodePath + episodeIDString
+        let episodesIDsString = episodesIDs.joined(separator: ",")
         
-        guard let url = components.url else { return }
+        guard let url = generateURLComponents(using: Constants.episodePath + "/" + episodesIDsString) else { return }
         
-        let task = session.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
+        session.dataTask(with: url, completionHandler: { data, _, error in
+            
+            guard let data, error == nil else {
                 if let error = error {
                     completion(.failure(error))
                 }
@@ -112,22 +127,21 @@ class NetworkService {
             }
             
             do {
-                if episodeIDs.count == 1 {
-                    let episode = try JSONDecoder().decode(Episode.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(.success([episode.name]))
-                    }
+                var episodes = [Episode]()
+                
+                if episodesIDs.count == 1 {
+                    episodes.append(try JSONDecoder().decode(Episode.self, from: data))
                 } else {
-                    let episodes = try JSONDecoder().decode([Episode].self, from: data)
-                    let episodeNames = episodes.map { $0.name }
-                    DispatchQueue.main.async {
-                        completion(.success(episodeNames))
-                    }
+                    episodes = try JSONDecoder().decode([Episode].self, from: data)
                 }
+                
+                DispatchQueue.main.async {
+                    completion(.success(episodes.map({ $0.name })))
+                }
+                
             } catch {
                 completion(.failure(error))
             }
-        }
-        task.resume()
+        }).resume()
     }
 }
