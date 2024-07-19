@@ -1,5 +1,5 @@
 //
-//  Character.swift
+//  Personage.swift
 //  RickAndMorty
 //
 //  Created by KOДИ on 18.07.2024.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-struct CharactersResponse: Codable {
-    let characters: [Character]?
+struct PersonagesResponse: Codable {
+    let personages: [Personage]?
     
     enum CodingKeys: String, CodingKey {
-        case characters = "results"
+        case personages = "results"
     }
 }
 
-struct Character: Codable {
+struct Personage: Codable {
     let id: Int
     let name: String
     let status: Status
@@ -35,5 +35,16 @@ enum Status: String, Codable {
     case alive = "Alive"
     case dead = "Dead"
     case unknown = "unknown"
+    
+    var coloring: UIColor {
+        switch self {
+        case .alive:
+            return .systemGreen
+        case .dead:
+            return .systemRed
+        case .unknown:
+            return .systemGray
+        }
+    }
 }
 

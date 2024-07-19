@@ -1,5 +1,5 @@
 //
-//  CharactersListViewController.swift
+//  PersonagesListViewController.swift
 //  RickAndMorty
 //
 //  Created by KOДИ on 17.07.2024.
@@ -8,11 +8,11 @@
 import UIKit
 
 protocol CharactersListViewControllerDelegate: AnyObject {
-    func updateList(_ characters: [Character])
-    func appendList(_ characters: [Character])
+    func updateList(_ personage: [Personage])
+    func appendList(_ personage: [Personage])
 }
 
-class CharactersListViewController: UIViewController {
+class PersonagesListViewController: UIViewController {
     
     weak var delegate: CharactersListViewControllerDelegate?
     
@@ -21,8 +21,8 @@ class CharactersListViewController: UIViewController {
     private var filterCriteria: Filter?
     private var searchQuery: String?
     
-    private lazy var charactersListView: CharactersListView = {
-        let view = CharactersListView()
+    private lazy var charactersListView: PersonagesListView = {
+        let view = PersonagesListView()
         view.delegate = self
         delegate = view
         return view
@@ -31,7 +31,6 @@ class CharactersListViewController: UIViewController {
     private lazy var filterVC: FilterViewController = {
         let vc = FilterViewController()
         vc.delegate = self
-        
         vc.sheetPresentationController?.prefersGrabberVisible = false
         return vc
     }()
@@ -56,7 +55,7 @@ class CharactersListViewController: UIViewController {
     
     private func fetchCharacters() {
         isLoading = true
-        NetworkService.shared.fetchCharacters(page: currentPage, searchQuery: searchQuery, filterCriteria: filterCriteria) { [weak self] result in
+        NetworkService.shared.fetchPersonages(page: currentPage, searchQuery: searchQuery, filterCriteria: filterCriteria) { [weak self] result in
             guard let self else { return }
             isLoading = false
             
@@ -71,7 +70,7 @@ class CharactersListViewController: UIViewController {
 }
 
 //MARK: - FilterViewControllerDelegate
-extension CharactersListViewController: FilterViewControllerDelegate {
+extension PersonagesListViewController: FilterViewControllerDelegate {
     func didApplyFilters(criteria: Filter) {
         filterCriteria = criteria
         currentPage = 1
@@ -80,10 +79,10 @@ extension CharactersListViewController: FilterViewControllerDelegate {
 }
 
 //MARK: - CharactersListViewDelegate
-extension CharactersListViewController: CharactersListViewDelegate {
+extension PersonagesListViewController: PersonagesListViewDelegate {
     
-    func didSelectCharacter(_ character: Character) {
-        navigationController?.pushViewController(DetailViewController(character: character), animated: true)
+    func didSelectCharacter(_ personage: Personage) {
+        navigationController?.pushViewController(DetailViewController(personage: personage), animated: true)
     }
     
     func loadMoreCharacters() {
@@ -105,7 +104,7 @@ extension CharactersListViewController: CharactersListViewDelegate {
 }
 
 //MARK: - Constraints
-private extension CharactersListViewController {
+private extension PersonagesListViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             charactersListView.topAnchor.constraint(equalTo: view.topAnchor, constant: 2),

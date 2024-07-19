@@ -9,12 +9,9 @@ import UIKit
 
 class SearchTextField: UITextField {
     
-    private let searchIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "magnifyingglass")
-        imageView.tintColor = .white
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    private lazy var searchIconView: IconView = {
+        IconView(with: UIImage(systemName: "magnifyingglass"), 
+                 frame: CGRect(x: 0, y: 0, width: 44, height: 24))
     }()
     
     override init(frame: CGRect) {
@@ -22,7 +19,6 @@ class SearchTextField: UITextField {
         
         setAppearance()
         setupLeftView()
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -40,15 +36,6 @@ class SearchTextField: UITextField {
     }
     
     private func setupLeftView() {
-        let container = UIView(frame: CGRect(x: 0, y: 0, width: 34 + 10, height: 24))
-        searchIcon.frame = CGRect(x: 10, y: 0, width: 24, height: 24)
-        container.addSubview(searchIcon)
-        leftView = container
-    }
-    
-    private func setupConstraints() {
-        translatesAutoresizingMaskIntoConstraints = false
-        heightAnchor.constraint(equalToConstant: 40).isActive = true
-        widthAnchor.constraint(equalToConstant: 320).isActive = true
+        leftView = searchIconView
     }
 }

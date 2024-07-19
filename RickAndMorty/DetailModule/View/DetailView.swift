@@ -9,11 +9,10 @@ import UIKit
 
 class DetailView: UIView {
     
-    private let networkService = NetworkService.shared
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         return scrollView
     }()
     
@@ -81,37 +80,26 @@ class DetailView: UIView {
         
         addSubview(scrollView)
         scrollView.addSubview(posterImageView)
-        scrollView.addSubview(statusView)
         scrollView.addSubview(itemsStackView)
     }
 }
 
 //MARK: - DetailViewControllerDelegate
 extension DetailView: DetailViewControllerDelegate {
-    func configure(with character: Character) {
-        networkService.fetchImage(from: character.image) { [weak self] result in
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
-                    self?.posterImageView.image = image
-                }
-            case .failure(let error):
-                print("Failed to load image: \(error)")
-            }
-        }
-        
-        statusView.configure(with: character.status)
-        speciesLabel.text = "Species: \(character.species)"
-        genderLabel.text = "Gender: \(character.gender)"
-        networkService.fetchEpisodesNames(from: character.episode) { [weak self] result in
-            switch result {
-            case .success(let episodeNames):
-                self?.episodesLabel.text = "Episodes: \(episodeNames.joined(separator: ", "))"
-            case .failure(let error):
-                print("Failed to load episode names: \(error)")
-            }
-        }
-        locationLabel.text = "Last known location: \(character.location.name)"
+    
+    func configurePoster(_ image: UIImage) {
+        posterImageView.image = image
+    }
+    
+    func configureEpisodes(_ text: String) {
+        episodesLabel.text = text
+    }
+    
+    func configure(with personage: Personage) {
+        statusView.configure(with: personage.status)
+        speciesLabel.text = "Species: \(personage.species)"
+        genderLabel.text = "Gender: \(personage.gender)"
+        locationLabel.text = "Last known location: \(personage.location.name)"
     }
 }
 
@@ -125,8 +113,9 @@ private extension DetailView {
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             itemsStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            itemsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            itemsStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            itemsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            itemsStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+//            itemsStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             itemsStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }

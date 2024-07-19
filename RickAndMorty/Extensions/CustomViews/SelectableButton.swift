@@ -9,12 +9,6 @@ import UIKit
 
 class SelectableButton: UIButton {
     
-    var isSelectedButton: Bool = false {
-        didSet {
-            updateAppearance()
-        }
-    }
-    
     init(title: String, frame: CGRect = .zero) {
         super.init(frame: frame)
         setTitle(title, for: .normal)
@@ -31,7 +25,6 @@ class SelectableButton: UIButton {
     
     private func setAppearance() {
         translatesAutoresizingMaskIntoConstraints = false
-        heightAnchor.constraint(equalToConstant: 35).isActive = true
         layer.cornerRadius = 10
         layer.borderWidth = 1
         layer.borderColor = UIColor.darkGray.cgColor
@@ -42,17 +35,12 @@ class SelectableButton: UIButton {
     }
     
     private func updateAppearance() {
-        if isSelectedButton {
-            backgroundColor = .white
-            setTitleColor(.black, for: .normal)
-        } else {
-            backgroundColor = .black
-            setTitleColor(.white, for: .normal)
-        }
+        backgroundColor = isSelected ? .white : .black
     }
     
     @objc private func buttonTapped() {
-        isSelectedButton.toggle()
+        isSelected.toggle()
+        updateAppearance()
     }
 }
 

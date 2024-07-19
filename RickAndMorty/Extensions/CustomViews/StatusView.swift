@@ -37,21 +37,12 @@ class StatusView: UIView {
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(statusLabel)
     }
     
     func configure(with status: Status) {
         statusLabel.text = status.rawValue
-        
-        switch status {
-        case .alive:
-            backgroundColor = .systemGreen
-        case .dead:
-            backgroundColor = .systemRed
-        case .unknown:
-            backgroundColor = .systemGray
-        }
+        backgroundColor = status.coloring
     }
 }
 

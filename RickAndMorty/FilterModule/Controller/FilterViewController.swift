@@ -35,14 +35,8 @@ class FilterViewController: UIViewController {
 
 //MARK: - FilterViewDelegate
 extension FilterViewController: FilterViewDelegate {
-    func didApplyFilter(status: String?, gender: String?) {
-        let criteria = Filter(status: status, gender: gender)
-        delegate?.didApplyFilters(criteria: criteria)
-        dismiss(animated: true)
-    }
-    
-    func didResetFilters() {
-        delegate?.didApplyFilters(criteria: Filter(status: nil, gender: nil))
+    func didApplyFilter(filter: Filter) {
+        delegate?.didApplyFilters(criteria: filter)
         dismiss(animated: true)
     }
 }

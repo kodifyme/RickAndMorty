@@ -10,7 +10,7 @@ import UIKit
 struct Constants {
     static let scheme = "https"
     static let host = "rickandmortyapi.com"
-    static let characterPath = "/api/character"
+    static let personagesPath = "/api/character"
     static let episodePath = "/api/episode"
 }
 
@@ -36,11 +36,11 @@ class NetworkService {
         return components.url
     }
     
-    func fetchCharacters(page: Int, searchQuery: String?, filterCriteria: Filter?, completion: @escaping (Result<[Character], Error>) -> Void) {
+    func fetchPersonages(page: Int, searchQuery: String?, filterCriteria: Filter?, completion: @escaping (Result<[Personage], Error>) -> Void) {
         
-        guard let baseCharacterURL = generateURLComponents(using: Constants.characterPath) else { return }
+        guard let basePersonageURL = generateURLComponents(using: Constants.personagesPath) else { return }
         
-        guard var components = URLComponents(url: baseCharacterURL, resolvingAgainstBaseURL: false) else { return }
+        guard var components = URLComponents(url: basePersonageURL, resolvingAgainstBaseURL: false) else { return }
         
         components.queryItems = [
             URLQueryItem(name: QueryItem.page, value: "\(page)")
@@ -70,9 +70,9 @@ class NetworkService {
             }
             
             do {
-                let results = try JSONDecoder().decode(CharactersResponse.self, from: data)
+                let results = try JSONDecoder().decode(PersonagesResponse.self, from: data)
                 DispatchQueue.main.async {
-                    completion(.success(results.characters ?? []))
+                    completion(.success(results.personages ?? []))
                 }
             } catch {
                 completion(.failure(error))
@@ -105,7 +105,7 @@ class NetworkService {
         }).resume()
     }
     
-    func fetchEpisodesNames(from episodesURLs: [String], completion: @escaping (Result<[String], Error>) -> Void) {
+    func fetchEpisodesNames(from episodesURLs: [String], completion: @escaping (Result<[Episode], Error>) -> Void) {
         
         let episodesIDs = episodesURLs.compactMap { URL(string: $0)?.lastPathComponent }
         guard !episodesIDs.isEmpty else {
@@ -136,7 +136,7 @@ class NetworkService {
                 }
                 
                 DispatchQueue.main.async {
-                    completion(.success(episodes.map({ $0.name })))
+                    completion(.success(episodes))
                 }
                 
             } catch {

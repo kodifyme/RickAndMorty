@@ -8,22 +8,26 @@
 import UIKit
 
 protocol DetailViewControllerDelegate: AnyObject {
-    func configure(with character: Character)
+    func configure(with personage: Personage)
+    func configurePoster(_ image: UIImage)
+    func configureEpisodes(_ text: String)
 }
 
 class DetailViewController: UIViewController {
     
     weak var delegate: DetailViewControllerDelegate?
+    private let networkService = NetworkService.shared
+    
     private lazy var detailView: DetailView = {
         var view = DetailView()
         delegate = view
         return view
     }()
     
-    private let character: Character
+    private let personage: Personage
     
-    init(character: Character) {
-        self.character = character
+    init(personage: Personage) {
+        self.personage = personage
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,14 +38,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationBar(with: character)
+        setupNavigationBar(with: personage)
         setupView()
-        configureView(with: character)
+        configureView(with: personage)
         setupContraints()
     }
     
-    private func setupNavigationBar(with character: Character) {
-        title = character.name
+    private func setupNavigationBar(with personage: Personage) {
+        title = personage.name
         navigationItem.largeTitleDisplayMode = .never
     }
     
@@ -50,8 +54,26 @@ class DetailViewController: UIViewController {
         view.addSubview(detailView)
     }
     
-    private func configureView(with character: Character) {
-        delegate?.configure(with: character)
+    private func configureView(with personage: Personage) {
+        delegate?.configure(with: personage)
+        
+        networkService.fetchImage(from: personage.image) { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.delegate?.configurePoster(image)
+            case .failure(let error):
+                print("Failed to load image: \(error)")
+            }
+        }
+        
+        networkService.fetchEpisodesNames(from: personage.episode) { [weak self] result in
+            switch result {
+            case .success(let episodes):
+                self?.delegate?.configureEpisodes("Episodes: \(episodes.map({ $0.name }).joined(separator: ", "))")
+            case .failure(let error):
+                print("Failed to load episode names: \(error)")
+            }
+        }
     }
 }
 

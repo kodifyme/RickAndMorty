@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121883972C4AEB3D0034EE49 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121883962C4AEB3D0034EE49 /* CustomSegmentedControl.swift */; };
+		1218839A2C4B01F80034EE49 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121883992C4B01F80034EE49 /* IconView.swift */; };
 		1280A4E82C49D3E800AB0153 /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1280A4E72C49D3E800AB0153 /* SelectableButton.swift */; };
 		128A335B2C47F05B00AA60C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A335A2C47F05B00AA60C2 /* AppDelegate.swift */; };
 		128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A335C2C47F05B00AA60C2 /* SceneDelegate.swift */; };
@@ -14,12 +16,12 @@
 		128A33672C47F05C00AA60C2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 128A33662C47F05C00AA60C2 /* Base */; };
 		12A7778B2C4A5D730071A36A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A7778A2C4A5D730071A36A /* Filter.swift */; };
 		12A7778F2C4A88EB0071A36A /* ActivityFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */; };
-		12C1DD0B2C47F58100ABB58F /* CharactersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */; };
-		12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */; };
-		12C1DD132C4815B000ABB58F /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD122C4815B000ABB58F /* CharacterCell.swift */; };
+		12C1DD0B2C47F58100ABB58F /* PersonagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */; };
+		12C1DD102C47F5FF00ABB58F /* PersonagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */; };
+		12C1DD132C4815B000ABB58F /* PersonageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD122C4815B000ABB58F /* PersonageCell.swift */; };
 		12C1DD162C48433600ABB58F /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */; };
 		12C1DD1B2C486AEA00ABB58F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD1A2C486AEA00ABB58F /* NetworkService.swift */; };
-		12C1DD1D2C486B2F00ABB58F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD1C2C486B2F00ABB58F /* Character.swift */; };
+		12C1DD1D2C486B2F00ABB58F /* Personage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD1C2C486B2F00ABB58F /* Personage.swift */; };
 		12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD242C488BD200ABB58F /* DetailViewController.swift */; };
 		12C1DD272C488F7D00ABB58F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD262C488F7D00ABB58F /* DetailView.swift */; };
 		12C1DD2C2C4892CF00ABB58F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD2B2C4892CF00ABB58F /* StatusView.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		121883962C4AEB3D0034EE49 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		121883992C4B01F80034EE49 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		1280A4E72C49D3E800AB0153 /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
 		128A33572C47F05B00AA60C2 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		128A335A2C47F05B00AA60C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,12 +43,12 @@
 		128A33682C47F05C00AA60C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = RickAndMorty/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		12A7778A2C4A5D730071A36A /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFooterView.swift; sourceTree = "<group>"; };
-		12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewController.swift; sourceTree = "<group>"; };
-		12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListView.swift; sourceTree = "<group>"; };
-		12C1DD122C4815B000ABB58F /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
+		12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonagesListViewController.swift; sourceTree = "<group>"; };
+		12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonagesListView.swift; sourceTree = "<group>"; };
+		12C1DD122C4815B000ABB58F /* PersonageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonageCell.swift; sourceTree = "<group>"; };
 		12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 		12C1DD1A2C486AEA00ABB58F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		12C1DD1C2C486B2F00ABB58F /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		12C1DD1C2C486B2F00ABB58F /* Personage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personage.swift; sourceTree = "<group>"; };
 		12C1DD242C488BD200ABB58F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		12C1DD262C488F7D00ABB58F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		12C1DD2B2C4892CF00ABB58F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
@@ -65,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		121883982C4AFF380034EE49 /* Footer */ = {
+			isa = PBXGroup;
+			children = (
+				12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */,
+			);
+			path = Footer;
+			sourceTree = "<group>";
+		};
 		123BDE4A2C47F19C00CFCC86 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,8 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				12C1DD112C4815A000ABB58F /* Cell */,
-				12C1DD0F2C47F5FF00ABB58F /* CharactersListView.swift */,
-				12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */,
+				12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */,
+				121883982C4AFF380034EE49 /* Footer */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -144,7 +156,7 @@
 		12C1DD0D2C47F59400ABB58F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				12C1DD0A2C47F58100ABB58F /* CharactersListViewController.swift */,
+				12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -152,7 +164,7 @@
 		12C1DD0E2C47F5C600ABB58F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				12C1DD1C2C486B2F00ABB58F /* Character.swift */,
+				12C1DD1C2C486B2F00ABB58F /* Personage.swift */,
 				12C1DD362C496B4600ABB58F /* Episode.swift */,
 				12A7778A2C4A5D730071A36A /* Filter.swift */,
 			);
@@ -162,7 +174,7 @@
 		12C1DD112C4815A000ABB58F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				12C1DD122C4815B000ABB58F /* CharacterCell.swift */,
+				12C1DD122C4815B000ABB58F /* PersonageCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -223,7 +235,9 @@
 			children = (
 				12C1DD2B2C4892CF00ABB58F /* StatusView.swift */,
 				12C1DD3A2C49AC0E00ABB58F /* SearchTextField.swift */,
+				121883992C4B01F80034EE49 /* IconView.swift */,
 				1280A4E72C49D3E800AB0153 /* SelectableButton.swift */,
+				121883962C4AEB3D0034EE49 /* CustomSegmentedControl.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -308,21 +322,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				12C1DD3D2C49B37500ABB58F /* FilterView.swift in Sources */,
+				121883972C4AEB3D0034EE49 /* CustomSegmentedControl.swift in Sources */,
 				1280A4E82C49D3E800AB0153 /* SelectableButton.swift in Sources */,
 				12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */,
 				12C1DD372C496B4600ABB58F /* Episode.swift in Sources */,
-				12C1DD132C4815B000ABB58F /* CharacterCell.swift in Sources */,
+				1218839A2C4B01F80034EE49 /* IconView.swift in Sources */,
+				12C1DD132C4815B000ABB58F /* PersonageCell.swift in Sources */,
 				12C1DD2C2C4892CF00ABB58F /* StatusView.swift in Sources */,
 				12C1DD162C48433600ABB58F /* UIStackView + Extensions.swift in Sources */,
 				12C1DD272C488F7D00ABB58F /* DetailView.swift in Sources */,
 				128A335B2C47F05B00AA60C2 /* AppDelegate.swift in Sources */,
 				128A335D2C47F05B00AA60C2 /* SceneDelegate.swift in Sources */,
 				12C1DD402C49C7B000ABB58F /* FilterViewController.swift in Sources */,
-				12C1DD102C47F5FF00ABB58F /* CharactersListView.swift in Sources */,
+				12C1DD102C47F5FF00ABB58F /* PersonagesListView.swift in Sources */,
 				12A7778F2C4A88EB0071A36A /* ActivityFooterView.swift in Sources */,
-				12C1DD0B2C47F58100ABB58F /* CharactersListViewController.swift in Sources */,
+				12C1DD0B2C47F58100ABB58F /* PersonagesListViewController.swift in Sources */,
 				12C1DD1B2C486AEA00ABB58F /* NetworkService.swift in Sources */,
-				12C1DD1D2C486B2F00ABB58F /* Character.swift in Sources */,
+				12C1DD1D2C486B2F00ABB58F /* Personage.swift in Sources */,
 				12C1DD3B2C49AC0E00ABB58F /* SearchTextField.swift in Sources */,
 				12A7778B2C4A5D730071A36A /* Filter.swift in Sources */,
 			);

@@ -27,19 +27,14 @@ class ActivityFooterView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
+    private func setupView() {
         addSubview(activityIndicator)
-        
-        NSLayoutConstraint.activate([
-            activityIndicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
-            activityIndicator.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
+        setupConstraints()
     }
 }
 
-extension ActivityFooterView: CharactersListActivityDelegate {
+//MARK: - PersonagesListActivityDelegate
+extension ActivityFooterView: PersonagesListActivityDelegate {
     
     func start() {
         activityIndicator.startAnimating()
@@ -47,5 +42,17 @@ extension ActivityFooterView: CharactersListActivityDelegate {
     
     func stop() {
         activityIndicator.stopAnimating()
+    }
+}
+
+//MARK: - Constraints
+private extension ActivityFooterView {
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            activityIndicator.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            activityIndicator.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1),
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
 }

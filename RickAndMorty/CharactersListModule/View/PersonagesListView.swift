@@ -1,5 +1,5 @@
 //
-//  CharactersListView.swift
+//  PersonagesListView.swift
 //  RickAndMorty
 //
 //  Created by KOДИ on 17.07.2024.
@@ -7,28 +7,29 @@
 
 import UIKit
 
-protocol CharactersListViewDelegate: AnyObject {
-    func didSelectCharacter(_ character: Character)
+protocol PersonagesListViewDelegate: AnyObject {
+    func didSelectCharacter(_ personage: Personage)
     func loadMoreCharacters()
     func searchTextChanged(_ text: String)
     func filterButtonTapped()
 }
 
-protocol CharactersListActivityDelegate: AnyObject {
+protocol PersonagesListActivityDelegate: AnyObject {
     func start()
     func stop()
 }
 
-class CharactersListView: UIView {
+class PersonagesListView: UIView {
     
-    weak var delegate: CharactersListViewDelegate?
-    weak var activityDelegate: CharactersListActivityDelegate?
+    weak var delegate: PersonagesListViewDelegate?
+    weak var activityDelegate: PersonagesListActivityDelegate?
     
-    private var characters: [Character] = []
+    private var characters: [Personage] = []
     
     private lazy var searchTextField: SearchTextField = {
         let textField = SearchTextField()
         textField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -56,7 +57,7 @@ class CharactersListView: UIView {
         }()
         
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.identifier)
+        tableView.register(PersonageCell.self, forCellReuseIdentifier: PersonageCell.identifier)
         tableView.register(ActivityFooterView.self, forHeaderFooterViewReuseIdentifier: ActivityFooterView.identifier)
         tableView.backgroundColor = .black
         tableView.separatorStyle = .none
@@ -97,23 +98,35 @@ class CharactersListView: UIView {
 }
 
 //MARK: - UITableViewDataSource
-extension CharactersListView: UITableViewDataSource {
+extension PersonagesListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterCell.identifier, for: indexPath) as? CharacterCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PersonageCell.identifier, for: indexPath) as? PersonageCell else {
             return UITableViewCell()
         }
-        cell.configure(with: characters[indexPath.row])
+        
+        let personage = characters[indexPath.row]
+        
+        NetworkService.shared.fetchImage(from: personage.image) { result in
+            switch result {
+            case .success(let image):
+                cell.configurePoster(image)
+            case .failure(let error):
+                print("Failed to load image: \(error)")
+            }
+        }
+        
+        cell.configure(with: personage)
         return cell
     }
 }
 
 //MARK: - UITableViewDelegate
-extension CharactersListView: UITableViewDelegate {
+extension PersonagesListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
     }
@@ -136,15 +149,15 @@ extension CharactersListView: UITableViewDelegate {
 }
 
 //MARK: - CharactersListViewControllerDelegate
-extension CharactersListView: CharactersListViewControllerDelegate {
+extension PersonagesListView: CharactersListViewControllerDelegate {
     
-    func updateList(_ characters: [Character]) {
+    func updateList(_ characters: [Personage]) {
         self.characters = characters
         activityDelegate?.stop()
         charactersTableView.reloadData()
     }
     
-    func appendList(_ characters: [Character]) {
+    func appendList(_ characters: [Personage]) {
         activityDelegate?.stop()
         guard !characters.isEmpty else { return }
         self.characters.append(contentsOf: characters)
@@ -153,7 +166,7 @@ extension CharactersListView: CharactersListViewControllerDelegate {
 }
 
 //MARK: - Constraints
-private extension CharactersListView {
+private extension PersonagesListView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             searchStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -163,7 +176,10 @@ private extension CharactersListView {
             charactersTableView.topAnchor.constraint(equalTo: searchStackView.bottomAnchor, constant: 5),
             charactersTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             charactersTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            charactersTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            charactersTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            
+            searchTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.83),
+            searchTextField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 }
