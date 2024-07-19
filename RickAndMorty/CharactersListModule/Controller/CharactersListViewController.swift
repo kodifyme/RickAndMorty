@@ -37,16 +37,9 @@ class CharactersListViewController: UIViewController {
         UIStackView(arrangedSubviews: [searchTextField, filterButton],
                     axis: .horizontal,
                     spacing: 2,
-                    aligment: .center)
+                    alignment: .center)
     }()
-    //
-    //    private lazy var filterView: FilterView = {
-    //        let view = FilterView()
-    //        view.delegate = self
-    //        view.translatesAutoresizingMaskIntoConstraints = false
-    //        return view
-    //    }()
-    
+
     private lazy var charactersListView: CharactersListView = {
         let view = CharactersListView()
         view.delegate = self

@@ -60,14 +60,14 @@ class CharacterCell: UITableViewCell {
        UIStackView(arrangedSubviews: [statusLabel, speciesLabel],
                    axis: .horizontal,
                    spacing: 2,
-                   aligment: .leading)
+                   alignment: .leading)
     }()
     
     private lazy var characteristicsStackView: UIStackView = {
         UIStackView(arrangedSubviews: [nameLabel, statusSpeciesStackView, genderLabel],
                     axis: .vertical,
                     spacing: 5,
-                    aligment: .leading)
+                    alignment: .leading)
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

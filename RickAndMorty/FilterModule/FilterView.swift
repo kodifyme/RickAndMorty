@@ -18,15 +18,18 @@ class FilterView: UIView {
         return label
     }()
     
-    private let deadButton = SelectableButton()
-    private let aliveButton = SelectableButton()
-    private let unknownButton = SelectableButton()
+    private let deadButton = SelectableButton(title: "Dead")
+    private let aliveButton = SelectableButton(title: "Alive")
+    private let unknownButton = SelectableButton(title: "Unknown")
     
     private lazy var statusStackView: UIStackView = {
-        UIStackView(arrangedSubviews: [deadButton, aliveButton, unknownButton],
-                    axis: .horizontal,
-                    spacing: 8,
-                    aligment: .leading)
+        let stackView = UIStackView(arrangedSubviews: [deadButton, aliveButton, unknownButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private let genderLabel: UILabel = {
@@ -38,16 +41,19 @@ class FilterView: UIView {
         return label
     }()
     
-    private let femaleButton = SelectableButton()
-    private let maleButton = SelectableButton()
-    private let genderlessButton = SelectableButton()
-    private let genderUnknownButton = SelectableButton()
+    private let femaleButton = SelectableButton(title: "Female")
+    private let maleButton = SelectableButton(title: "Male")
+    private let genderlessButton = SelectableButton(title: "Genderless")
+    private let genderUnknownButton = SelectableButton(title: "Unknown")
     
     private lazy var genderStackView: UIStackView = {
-        UIStackView(arrangedSubviews: [femaleButton, maleButton, genderLabel, genderUnknownButton],
-                    axis: .horizontal,
-                    spacing: 8,
-                    aligment: .leading)
+        let stackView = UIStackView(arrangedSubviews: [femaleButton, maleButton, genderlessButton, genderUnknownButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private lazy var applyButton: UIButton = {
@@ -72,7 +78,7 @@ class FilterView: UIView {
         UIStackView(arrangedSubviews: [applyButton, resetButton],
                     axis: .horizontal,
                     spacing: 10,
-                    aligment: .center)
+                    alignment: .center)
     }()
     
     override init(frame: CGRect) {
@@ -88,7 +94,7 @@ class FilterView: UIView {
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .darkGray
+        backgroundColor = .black
         layer.cornerRadius = 10
         
         addSubview(statusLabel)
@@ -114,21 +120,20 @@ private extension FilterView {
             statusLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             statusLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            statusStackView.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+            statusStackView.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 20),
             statusStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            statusStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            statusStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             genderLabel.topAnchor.constraint(equalTo: statusStackView.bottomAnchor, constant: 20),
             genderLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            genderStackView.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 10),
+            genderStackView.topAnchor.constraint(equalTo: genderLabel.bottomAnchor, constant: 20),
             genderStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             genderStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            buttonsStackView.topAnchor.constraint(equalTo: genderStackView.bottomAnchor, constant: 10),
+            buttonsStackView.topAnchor.constraint(equalTo: genderStackView.bottomAnchor, constant: 40),
             buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
-            
         ])
     }
 }

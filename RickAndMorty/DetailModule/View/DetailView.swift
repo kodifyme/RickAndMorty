@@ -61,7 +61,7 @@ class DetailView: UIView {
         UIStackView(arrangedSubviews: [posterImageView, statusView, speciesLabel, genderLabel, episodesLabel, locationLabel],
                     axis: .vertical,
                     spacing: 12,
-                    aligment: .fill)
+                    alignment: .fill)
     }()
     
     override init(frame: CGRect) {

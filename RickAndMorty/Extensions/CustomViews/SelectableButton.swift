@@ -15,10 +15,13 @@ class SelectableButton: UIButton {
         }
     }
     
-    override init(frame: CGRect) {
+    init(title: String, frame: CGRect = .zero) {
         super.init(frame: frame)
+        setTitle(title, for: .normal)
+        titleLabel?.adjustsFontSizeToFitWidth = true
         
         setAppearance()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -50,5 +53,15 @@ class SelectableButton: UIButton {
     
     @objc private func buttonTapped() {
         isSelectedButton.toggle()
+    }
+}
+
+//MARK: - Constraints
+private extension SelectableButton {
+    func setConstraints() {
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 35),
+            widthAnchor.constraint(equalToConstant: 230)
+        ])
     }
 }
