@@ -12,7 +12,6 @@ class DetailView: UIView {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         return scrollView
     }()
     
@@ -79,7 +78,6 @@ class DetailView: UIView {
         backgroundColor = .black
         
         addSubview(scrollView)
-        scrollView.addSubview(posterImageView)
         scrollView.addSubview(itemsStackView)
     }
 }
@@ -113,9 +111,9 @@ private extension DetailView {
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             itemsStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            itemsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            itemsStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
+            itemsStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             itemsStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-//            itemsStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             itemsStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
