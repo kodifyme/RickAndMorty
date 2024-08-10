@@ -33,26 +33,26 @@ class PersonageCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
-        label.font = .boldSystemFont(ofSize: 18)
+        label.font = .ibmPlexSansBold16()
         return label
     }()
     
     private let statusLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .ibmPlexSansBold12()
         return label
     }()
     
     private let speciesLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = .ibmPlexSansBold12()
         label.textColor = .white
         return label
     }()
     
     private let genderLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = .ibmPlexSansRegular12()
         label.textColor = .white
         return label
     }()

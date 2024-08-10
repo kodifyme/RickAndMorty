@@ -19,6 +19,7 @@ class FilterView: UIView {
         let label = UILabel()
         label.text = "Status"
         label.textAlignment = .center
+        label.font = .ibmPlexSansBold18()
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,6 +33,7 @@ class FilterView: UIView {
         let label = UILabel()
         label.text = "Gender"
         label.textColor = .white
+        label.font = .ibmPlexSansBold18()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -47,6 +49,7 @@ class FilterView: UIView {
         button.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .ibmPlexSansBold16()
         button.layer.cornerRadius = 10
         return button
     }()
@@ -56,6 +59,7 @@ class FilterView: UIView {
         button.setTitle("Reset", for: .normal)
         button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .ibmPlexSansRegular16()
         return button
     }()
     

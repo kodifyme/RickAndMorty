@@ -11,7 +11,7 @@ class StatusView: UIView {
     
     private let statusLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 16)
+        label.font = .ibmPlexSansBold16()
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,6 @@ class StatusView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setAppearance()
         setupView()
         setupConstraints()
     }
@@ -30,13 +29,10 @@ class StatusView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setAppearance() {
-        backgroundColor = .green
-        layer.cornerRadius = 15
-    }
-    
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
+        layer.cornerRadius = 15
+        
         addSubview(statusLabel)
     }
     

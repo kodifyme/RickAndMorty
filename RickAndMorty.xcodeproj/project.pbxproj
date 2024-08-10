@@ -16,6 +16,9 @@
 		128A33672C47F05C00AA60C2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 128A33662C47F05C00AA60C2 /* Base */; };
 		12A7778B2C4A5D730071A36A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A7778A2C4A5D730071A36A /* Filter.swift */; };
 		12A7778F2C4A88EB0071A36A /* ActivityFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */; };
+		12A90C522C67FF7400872527 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A90C512C67FF7400872527 /* UIFont + Extensions.swift */; };
+		12A90C562C67FFB400872527 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12A90C542C67FFB400872527 /* IBMPlexSans-Bold.ttf */; };
+		12A90C592C68042200872527 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12A90C582C68042200872527 /* IBMPlexSans-Regular.ttf */; };
 		12C1DD0B2C47F58100ABB58F /* PersonagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */; };
 		12C1DD102C47F5FF00ABB58F /* PersonagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */; };
 		12C1DD132C4815B000ABB58F /* PersonageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD122C4815B000ABB58F /* PersonageCell.swift */; };
@@ -43,6 +46,9 @@
 		128A33682C47F05C00AA60C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = RickAndMorty/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		12A7778A2C4A5D730071A36A /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		12A7778E2C4A88EB0071A36A /* ActivityFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFooterView.swift; sourceTree = "<group>"; };
+		12A90C512C67FF7400872527 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
+		12A90C542C67FFB400872527 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
+		12A90C582C68042200872527 /* IBMPlexSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Regular.ttf"; sourceTree = "<group>"; };
 		12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonagesListViewController.swift; sourceTree = "<group>"; };
 		12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonagesListView.swift; sourceTree = "<group>"; };
 		12C1DD122C4815B000ABB58F /* PersonageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonageCell.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 		123BDE4B2C47F1D900CFCC86 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				12A90C532C67FF9300872527 /* Fonts */,
 				128A33632C47F05C00AA60C2 /* Assets.xcassets */,
 				128A33652C47F05C00AA60C2 /* LaunchScreen.storyboard */,
 				128A33682C47F05C00AA60C2 /* Info.plist */,
@@ -143,6 +150,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		12A90C502C67FF5C00872527 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */,
+				12A90C512C67FF7400872527 /* UIFont + Extensions.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		12A90C532C67FF9300872527 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				12A90C582C68042200872527 /* IBMPlexSans-Regular.ttf */,
+				12A90C542C67FFB400872527 /* IBMPlexSans-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		12C1DD0C2C47F58900ABB58F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,8 +207,8 @@
 		12C1DD142C4842FD00ABB58F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				12A90C502C67FF5C00872527 /* UIKit */,
 				12C1DD282C48926900ABB58F /* CustomViews */,
-				12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -309,8 +334,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12A90C592C68042200872527 /* IBMPlexSans-Regular.ttf in Resources */,
 				128A33642C47F05C00AA60C2 /* Assets.xcassets in Resources */,
 				128A33672C47F05C00AA60C2 /* Base in Resources */,
+				12A90C562C67FFB400872527 /* IBMPlexSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +363,7 @@
 				12C1DD402C49C7B000ABB58F /* FilterViewController.swift in Sources */,
 				12C1DD102C47F5FF00ABB58F /* PersonagesListView.swift in Sources */,
 				12A7778F2C4A88EB0071A36A /* ActivityFooterView.swift in Sources */,
+				12A90C522C67FF7400872527 /* UIFont + Extensions.swift in Sources */,
 				12C1DD0B2C47F58100ABB58F /* PersonagesListViewController.swift in Sources */,
 				12C1DD1B2C486AEA00ABB58F /* NetworkService.swift in Sources */,
 				12C1DD1D2C486B2F00ABB58F /* Personage.swift in Sources */,

@@ -28,14 +28,12 @@ class DetailView: UIView {
     private let speciesLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
     private let genderLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
@@ -43,7 +41,6 @@ class DetailView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
@@ -51,7 +48,6 @@ class DetailView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
@@ -80,6 +76,17 @@ class DetailView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(itemsStackView)
     }
+    
+    private func makeAttributedString(title: String, value: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(
+            string: "\(title): ",
+            attributes: [.font: UIFont.ibmPlexSansBold16() as Any])
+        attributedString.append(NSAttributedString(
+            string: value,
+            attributes: [.font: UIFont.ibmPlexSansRegular16() as Any]))
+        return attributedString
+    }
+
 }
 
 //MARK: - DetailViewControllerDelegate
@@ -94,10 +101,10 @@ extension DetailView: DetailViewControllerDelegate {
     }
     
     func configure(with personage: Personage) {
-        statusView.configure(with: personage.status)
-        speciesLabel.text = "Species: \(personage.species)"
-        genderLabel.text = "Gender: \(personage.gender)"
-        locationLabel.text = "Last known location: \(personage.location.name)"
+        speciesLabel.attributedText = makeAttributedString(title: "Species", value: personage.species)
+            genderLabel.attributedText = makeAttributedString(title: "Gender", value: personage.gender)
+            episodesLabel.attributedText = makeAttributedString(title: "Episode", value: personage.episode.joined(separator: ", "))
+            locationLabel.attributedText = makeAttributedString(title: "Last known location", value: personage.location.name)
     }
 }
 
