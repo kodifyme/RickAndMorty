@@ -12,7 +12,7 @@ class StatusView: UIView {
     private let statusLabel: UILabel = {
         let label = UILabel()
         label.font = .ibmPlexSansBold16()
-        label.textColor = .white
+        label.textColor = .whiteTextColor
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,7 +32,6 @@ class StatusView: UIView {
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 15
-        
         addSubview(statusLabel)
     }
     
@@ -47,7 +46,7 @@ private extension StatusView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 40),
-            widthAnchor.constraint(equalToConstant: 300),
+            widthAnchor.constraint(equalTo: widthAnchor),
             
             statusLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             statusLabel.centerYAnchor.constraint(equalTo: centerYAnchor)

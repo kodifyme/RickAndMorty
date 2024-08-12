@@ -23,30 +23,30 @@ class DetailView: UIView {
         return image
     }()
     
-    private let statusView = StatusView()
+    let statusView = StatusView()
     
     private let speciesLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .whiteTextColor
         return label
     }()
     
     private let genderLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .whiteTextColor
         return label
     }()
     
     private let episodesLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .whiteTextColor
         label.numberOfLines = 0
         return label
     }()
     
     private let locationLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .whiteTextColor
         label.numberOfLines = 0
         return label
     }()
@@ -86,25 +86,25 @@ class DetailView: UIView {
             attributes: [.font: UIFont.ibmPlexSansRegular16() as Any]))
         return attributedString
     }
-
 }
 
 //MARK: - DetailViewControllerDelegate
 extension DetailView: DetailViewControllerDelegate {
     
-    func configurePoster(_ image: UIImage) {
+    func configurePoster(with image: UIImage) {
         posterImageView.image = image
     }
     
-    func configureEpisodes(_ text: String) {
-        episodesLabel.text = text
+    func configureEpisodes(with episodesNames: String) {
+        episodesLabel.attributedText = makeAttributedString(title: "Episodes", value: episodesNames)
     }
     
     func configure(with personage: Personage) {
         speciesLabel.attributedText = makeAttributedString(title: "Species", value: personage.species)
-            genderLabel.attributedText = makeAttributedString(title: "Gender", value: personage.gender)
-            episodesLabel.attributedText = makeAttributedString(title: "Episode", value: personage.episode.joined(separator: ", "))
-            locationLabel.attributedText = makeAttributedString(title: "Last known location", value: personage.location.name)
+        genderLabel.attributedText = makeAttributedString(title: "Gender", value: personage.gender)
+        locationLabel.attributedText = makeAttributedString(title: "Last known location", value: personage.location.name)
+        
+        statusView.configure(with: personage.status)
     }
 }
 

@@ -13,7 +13,7 @@ class PersonageCell: UITableViewCell {
     
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = .containerViewColor
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,29 +31,29 @@ class PersonageCell: UITableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = .whiteTextColor
         label.adjustsFontSizeToFitWidth = true
-        label.font = .ibmPlexSansBold16()
+        label.font = .ibmPlexSansBold18()
         return label
     }()
     
     private let statusLabel: UILabel = {
         let label = UILabel()
-        label.font = .ibmPlexSansBold12()
+        label.font = .ibmPlexSansBold14()
         return label
     }()
     
     private let speciesLabel: UILabel = {
         let label = UILabel()
-        label.font = .ibmPlexSansBold12()
-        label.textColor = .white
+        label.font = .ibmPlexSansBold14()
+        label.textColor = .whiteTextColor
         return label
     }()
     
     private let genderLabel: UILabel = {
         let label = UILabel()
-        label.font = .ibmPlexSansRegular12()
-        label.textColor = .white
+        label.font = .ibmPlexSansRegular14()
+        label.textColor = .whiteTextColor
         return label
     }()
     

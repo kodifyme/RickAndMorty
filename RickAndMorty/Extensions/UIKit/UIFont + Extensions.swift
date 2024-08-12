@@ -14,6 +14,10 @@ extension UIFont {
         UIFont(name: "IBMPlexSans-Regular", size: 12)
     }
     
+    static func ibmPlexSansRegular14() -> UIFont? {
+        UIFont(name: "IBMPlexSans-Regular", size: 14)
+    }
+    
     static func ibmPlexSansRegular16() -> UIFont? {
         UIFont(name: "IBMPlexSans-Regular", size: 16)
     }

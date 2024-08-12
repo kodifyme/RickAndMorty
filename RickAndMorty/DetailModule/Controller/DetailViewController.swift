@@ -9,8 +9,8 @@ import UIKit
 
 protocol DetailViewControllerDelegate: AnyObject {
     func configure(with personage: Personage)
-    func configurePoster(_ image: UIImage)
-    func configureEpisodes(_ text: String)
+    func configurePoster(with image: UIImage)
+    func configureEpisodes(with episodesNames: String)
 }
 
 class DetailViewController: UIViewController {
@@ -60,7 +60,7 @@ class DetailViewController: UIViewController {
         networkService.fetchImage(from: personage.image) { [weak self] result in
             switch result {
             case .success(let image):
-                self?.delegate?.configurePoster(image)
+                self?.delegate?.configurePoster(with: image)
             case .failure(let error):
                 print("Failed to load image: \(error)")
             }
@@ -69,7 +69,7 @@ class DetailViewController: UIViewController {
         networkService.fetchEpisodesNames(from: personage.episode) { [weak self] result in
             switch result {
             case .success(let episodes):
-                self?.delegate?.configureEpisodes("Episodes: \(episodes.map({ $0.name }).joined(separator: ", "))")
+                self?.delegate?.configureEpisodes(with: episodes.map { $0.name }.joined(separator: " "))
             case .failure(let error):
                 print("Failed to load episode names: \(error)")
             }

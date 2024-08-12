@@ -23,7 +23,7 @@ class CustomSegmentedControl: UIStackView {
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.darkGray.cgColor
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.whiteTextColor, for: .normal)
         button.setTitleColor(.black, for: .selected)
         button.titleLabel?.font = .ibmPlexSansRegular16()
         button.titleLabel?.adjustsFontSizeToFitWidth = true

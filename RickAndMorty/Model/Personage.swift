@@ -39,11 +39,11 @@ enum Status: String, Codable {
     var coloring: UIColor {
         switch self {
         case .alive:
-            return .systemGreen
+            return .aliveColor
         case .dead:
-            return .systemRed
+            return .deadColor
         case .unknown:
-            return .systemGray
+            return .unknowColor
         }
     }
 }

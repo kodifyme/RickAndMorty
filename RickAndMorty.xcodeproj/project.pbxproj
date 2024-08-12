@@ -19,6 +19,7 @@
 		12A90C522C67FF7400872527 /* UIFont + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A90C512C67FF7400872527 /* UIFont + Extensions.swift */; };
 		12A90C562C67FFB400872527 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12A90C542C67FFB400872527 /* IBMPlexSans-Bold.ttf */; };
 		12A90C592C68042200872527 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12A90C582C68042200872527 /* IBMPlexSans-Regular.ttf */; };
+		12A90C5B2C6808E400872527 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A90C5A2C6808E400872527 /* UIColor + Extensions.swift */; };
 		12C1DD0B2C47F58100ABB58F /* PersonagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */; };
 		12C1DD102C47F5FF00ABB58F /* PersonagesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */; };
 		12C1DD132C4815B000ABB58F /* PersonageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C1DD122C4815B000ABB58F /* PersonageCell.swift */; };
@@ -49,6 +50,7 @@
 		12A90C512C67FF7400872527 /* UIFont + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extensions.swift"; sourceTree = "<group>"; };
 		12A90C542C67FFB400872527 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		12A90C582C68042200872527 /* IBMPlexSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Regular.ttf"; sourceTree = "<group>"; };
+		12A90C5A2C6808E400872527 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		12C1DD0A2C47F58100ABB58F /* PersonagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonagesListViewController.swift; sourceTree = "<group>"; };
 		12C1DD0F2C47F5FF00ABB58F /* PersonagesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonagesListView.swift; sourceTree = "<group>"; };
 		12C1DD122C4815B000ABB58F /* PersonageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonageCell.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				12C1DD152C48433600ABB58F /* UIStackView + Extensions.swift */,
 				12A90C512C67FF7400872527 /* UIFont + Extensions.swift */,
+				12A90C5A2C6808E400872527 /* UIColor + Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				12C1DD3D2C49B37500ABB58F /* FilterView.swift in Sources */,
 				121883972C4AEB3D0034EE49 /* CustomSegmentedControl.swift in Sources */,
 				1280A4E82C49D3E800AB0153 /* SelectableButton.swift in Sources */,
+				12A90C5B2C6808E400872527 /* UIColor + Extensions.swift in Sources */,
 				12C1DD252C488BD200ABB58F /* DetailViewController.swift in Sources */,
 				12C1DD372C496B4600ABB58F /* Episode.swift in Sources */,
 				1218839A2C4B01F80034EE49 /* IconView.swift in Sources */,

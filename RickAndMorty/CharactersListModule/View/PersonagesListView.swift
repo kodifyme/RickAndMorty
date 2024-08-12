@@ -28,6 +28,7 @@ class PersonagesListView: UIView {
     
     private lazy var searchTextField: SearchTextField = {
         let textField = SearchTextField()
+        textField.textColor = .whiteTextColor
         textField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
