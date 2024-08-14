@@ -14,6 +14,8 @@ struct Constants {
     static let episodePath = "/api/episode"
 }
 
+typealias CompletionHandler<T> = (Result<T, Error>) -> Void
+
 class NetworkService {
     
     struct QueryItem {
@@ -36,7 +38,7 @@ class NetworkService {
         return components.url
     }
     
-    func fetchPersonages(page: Int, searchQuery: String?, filterCriteria: Filter?, completion: @escaping (Result<[Personage], Error>) -> Void) {
+    func fetchPersonages(page: Int, searchQuery: String?, filterCriteria: Filter?, completion:  @escaping CompletionHandler<[Personage]>) {
         
         guard let basePersonageURL = generateURLComponents(using: Constants.personagesPath) else { return }
         
@@ -80,7 +82,7 @@ class NetworkService {
         }).resume()
     }
     
-    func fetchImage(from urlString: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+    func fetchImage(from urlString: String, completion: @escaping CompletionHandler<UIImage>) {
         
         guard let url = URL(string: urlString) else { return }
         
@@ -105,7 +107,7 @@ class NetworkService {
         }).resume()
     }
     
-    func fetchEpisodesNames(from episodesURLs: [String], completion: @escaping (Result<[Episode], Error>) -> Void) {
+    func fetchEpisodesNames(from episodesURLs: [String], completion: @escaping CompletionHandler<[Episode]>) {
         
         let episodesIDs = episodesURLs.compactMap { URL(string: $0)?.lastPathComponent }
         guard !episodesIDs.isEmpty else {
