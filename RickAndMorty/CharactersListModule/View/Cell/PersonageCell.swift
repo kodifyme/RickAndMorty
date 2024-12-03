@@ -106,6 +106,7 @@ class PersonageCell: UITableViewCell {
 
 //MARK: - Constraints
 private extension PersonageCell {
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),

@@ -21,10 +21,16 @@ protocol PersonagesListActivityDelegate: AnyObject {
 
 class PersonagesListView: UIView {
     
+    // MARK: - Connections
+    
     weak var delegate: PersonagesListViewDelegate?
     weak var activityDelegate: PersonagesListActivityDelegate?
     
+    // MARK: - Data
+    
     private var characters: [Personage] = []
+    
+    // MARK: - UI
     
     private lazy var searchTextField: SearchTextField = {
         let textField = SearchTextField()
@@ -58,8 +64,6 @@ class PersonagesListView: UIView {
         }()
         
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(PersonageCell.self, forCellReuseIdentifier: PersonageCell.identifier)
-        tableView.register(ActivityFooterView.self, forHeaderFooterViewReuseIdentifier: ActivityFooterView.identifier)
         tableView.backgroundColor = .black
         tableView.separatorStyle = .none
         tableView.dataSource = self
@@ -72,20 +76,15 @@ class PersonagesListView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        
+        setupAppearance()
+        embedViews()
+        setupBehaviour()
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .black
-        
-        addSubview(searchStackView)
-        addSubview(charactersTableView)
     }
     
     @objc private func searchTextChanged() {
@@ -98,7 +97,42 @@ class PersonagesListView: UIView {
     }
 }
 
+// MARK: - Setup appearance
+
+private extension PersonagesListView {
+    
+    func setupAppearance() {
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .black
+    }
+}
+
+// MARK: - Embed view
+
+private extension PersonagesListView {
+    
+    func embedViews() {
+        [
+            searchStackView,
+            charactersTableView
+        ].forEach { addSubview($0) }
+    }
+}
+
+// MARK: - Setup behaviour
+
+private extension PersonagesListView {
+    
+    func setupBehaviour() {
+        charactersTableView.register(PersonageCell.self, forCellReuseIdentifier: PersonageCell.identifier)
+        charactersTableView.register(ActivityFooterView.self, forHeaderFooterViewReuseIdentifier: ActivityFooterView.identifier)
+        
+       
+    }
+}
+
 //MARK: - UITableViewDataSource
+
 extension PersonagesListView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -127,6 +161,7 @@ extension PersonagesListView: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
+
 extension PersonagesListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
@@ -150,6 +185,7 @@ extension PersonagesListView: UITableViewDelegate {
 }
 
 //MARK: - CharactersListViewControllerDelegate
+
 extension PersonagesListView: CharactersListViewControllerDelegate {
     
     func updateList(_ characters: [Personage]) {
@@ -167,6 +203,7 @@ extension PersonagesListView: CharactersListViewControllerDelegate {
 }
 
 //MARK: - Constraints
+
 private extension PersonagesListView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
